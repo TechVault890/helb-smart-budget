@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HELB Smart Budget - Complete Financial Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #1a5f2a;
+            --primary-light: #2d8a44;
+            --primary-dark: #0f4d1f;
+            --success: #28a745;
+            --success-light: #34ce57;
+            --success-dark: #1e7e34;
+            --warning: #ffc107;
+            --warning-light: #ffd350;
+            --warning-dark: #e0a800;
+            --danger: #dc3545;
+            --danger-light: #e15361;
+            --danger-dark: #c82333;
+            --info: #17a2b8;
+            --info-light: #3ab7cc;
+            --info-dark: #138496;
+            --gray: #6c757d;
+            --gray-light: #8fa0ad;
+            --gray-dark: #495057;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --sidebar-bg: #0f4d1f;
+            --sidebar-hover: #1a5f2a;
+            --card-bg: #ffffff;
+            --body-bg: #f0f7f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--body-bg);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, var(--sidebar-bg), var(--primary-dark));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+
+        .logo {
+            padding: 0 20px 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            color: var(--success-light);
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-links li:hover {
+            background: rgba(255,255,255,0.1);
+            border-left-color: var(--success-light);
+        }
+
+        .nav-links li.active {
+            background: rgba(255,255,255,0.15);
+            border-left-color: var(--success-light);
+            font-weight: 600;
+        }
+
+        .nav-links i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .user-status {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Page Management */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Card Styles */
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .card.primary { border-left-color: var(--primary); }
+        .card.success { border-left-color: var(--success); }
+        .card.warning { border-left-color: var(--warning); }
+        .card.info { border-left-color: var(--info); }
+
+        .card h3 {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .amount {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .card.primary .amount { color: var(--primary); }
+        .card.success .amount { color: var(--success); }
+        .card.warning .amount { color: var(--warning-dark); }
+        .card.info .amount { color: var(--info); }
+
+        .card-footer {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--success);
+        }
+
+        /* Smart Alerts */
+        .smart-alerts {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--warning);
+        }
+
+        .smart-alerts h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .alert-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            background: #fff9e6;
+            border-radius: 10px;
+            border-left: 4px solid var(--warning);
+        }
+
+        .alert-item i {
+            color: var(--warning-dark);
+            margin-top: 2px;
+        }
+
+        /* Quick Actions */
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .quick-action {
+            background: white;
+            padding: 25px 20px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+        }
+
+        .quick-action:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: var(--success-light);
+        }
+
+        .quick-action i {
+            font-size: 2.5rem;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .quick-action span {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* AI Insights */
+        .ai-insights {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .insight-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--success);
+        }
+
+        .insight-icon {
+            font-size: 2rem;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .insight-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+
+        .insight-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Expense List */
+        .expense-list {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .expense-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .expense-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 15px;
+            padding: 20px;
+            border-bottom: 1px solid var(--light);
+            transition: background-color 0.3s ease;
+        }
+
+        .expense-item:hover {
+            background-color: #f8fff8;
+        }
+
+        .expense-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Progress Bars */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-safe { background: var(--success); }
+        .progress-warning { background: var(--warning); }
+        .progress-danger { background: var(--danger); }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--gray-light);
+            color: white;
+        }
+
+        /* Additional styles for new features */
+        .savings-goals {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .goal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f8fff8;
+            border-radius: 12px;
+            border-left: 5px solid var(--success);
+            transition: transform 0.3s ease;
+        }
+
+        .goal-item:hover {
+            transform: translateX(5px);
+        }
+        
+        .goal-progress {
+            flex: 1;
+            margin: 0 20px;
+        }
+        
+        .analytics-charts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 25px 0;
+        }
+        
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .quick-pay-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .quick-pay-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .quick-pay-btn {
+            background: rgba(255,255,255,0.15);
+            padding: 20px 15px;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .quick-pay-btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.3);
+        }
+        
+        .quick-pay-btn i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--success-light);
+        }
+        
+        .bill-reminder {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border-left: 5px solid var(--warning);
+        }
+        
+        .financial-tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .tip-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--info);
+            transition: transform 0.3s ease;
+        }
+
+        .tip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tip-card i {
+            font-size: 2rem;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .tip-card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Budget Categories */
+        .budget-categories {
+            display: grid;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .category-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary);
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .category-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .category-amount {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* Payment Status */
+        .payment-status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-paid {
+            background: #d4edda;
+            color: var(--success-dark);
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: var(--warning-dark);
+        }
+
+        /* Money Pulse */
+        .money-pulse {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .pulse-chart {
+            max-width: 300px;
+            margin: 0 auto 20px;
+        }
+
+        .summary-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .summary-label {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* Financial Summary */
+        .financial-summary {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8fff8;
+            border-radius: 12px;
+            border: 2px solid #e9ffe9;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+            
+            .nav-links {
+                display: flex;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+            
+            .nav-links li {
+                flex-shrink: 0;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            
+            .nav-links li.active {
+                border-left: none;
+                border-bottom: 3px solid var(--success-light);
+            }
+            
+            .expense-header,
+            .expense-item {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation for notifications */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1001;
+            animation: slideIn 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1><i class="fas fa-graduation-cap logo-icon"></i> HELB Smart Budget</h1>
+            </div>
+            <ul class="nav-links">
+                <li class="active" data-page="dashboard"><i class="fas fa-home"></i> Dashboard</li>
+                <li data-page="ai-advisor"><i class="fas fa-robot"></i> AI Advisor</li>
+                <li data-page="budget"><i class="fas fa-wallet"></i> Budget Allocation</li>
+                <li data-page="bills"><i class="fas fa-file-invoice-dollar"></i> My Bills</li>
+                <li data-page="payments"><i class="fas fa-credit-card"></i> Make Payments</li>
+                <li data-page="expenses"><i class="fas fa-receipt"></i> Expenses</li>
+                <li data-page="savings"><i class="fas fa-piggy-bank"></i> Savings Goals</li>
+                <li data-page="analytics"><i class="fas fa-chart-pie"></i> Analytics</li>
+                <li data-page="financial-tips"><i class="fas fa-lightbulb"></i> Financial Tips</li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="header">
+                <h1 id="page-title">Student Finance Dashboard</h1>
+                <div class="user-info">
+                    <div class="avatar">JK</div>
+                    <div>
+                        <div class="user-name">John Kariuki</div>
+                        <div class="user-status">University of Nairobi</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <div class="dashboard-cards">
+                    <div class="card primary">
+                        <h3>Total HELB Funds</h3>
+                        <div class="amount">KSh <span id="total-helb">68,000</span></div>
+                        <div class="card-footer">This Semester</div>
+                    </div>
+                    <div class="card success">
+                        <h3>Available Balance</h3>
+                        <div class="amount">KSh <span id="available-balance">42,150</span></div>
+                        <div class="card-footer">Ready to use</div>
+                    </div>
+                    <div class="card warning">
+                        <h3>Total Spent</h3>
+                        <div class="amount">KSh <span id="total-spent">25,850</span></div>
+                        <div class="card-footer">This Semester</div>
+                    </div>
+                    <div class="card info">
+                        <h3>Budget Health</h3>
+                        <div class="amount" id="budget-health">Good</div>
+                        <div class="card-footer" id="budget-status">All categories within limits</div>
+                    </div>
+                </div>
+
+                <!-- AI Smart Alerts -->
+                <div class="smart-alerts">
+                    <h4><i class="fas fa-bell"></i> Smart Alerts</h4>
+                    <div class="alert-item">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>You can save <strong>KSh 2,400</strong> this month by cooking at home 3 more days per week</span>
+                    </div>
+                    <div class="alert-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Your food spending is <strong>28% higher</strong> than students with similar budgets</span>
+                    </div>
+                </div>
+
+                <!-- Quick Pay Section -->
+                <div class="quick-pay-section">
+                    <h3><i class="fas fa-bolt"></i> Quick Pay Bills</h3>
+                    <div class="quick-pay-buttons">
+                        <div class="quick-pay-btn" data-bill="electricity">
+                            <i class="fas fa-bolt"></i>
+                            <div>Electricity</div>
+                            <small>KSh 1,500</small>
+                        </div>
+                        <div class="quick-pay-btn" data-bill="tuition">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>Tuition</div>
+                            <small>KSh 26,000</small>
+                        </div>
+                        <div class="quick-pay-btn" data-bill="rent">
+                            <i class="fas fa-home"></i>
+                            <div>Rent</div>
+                            <small>KSh 9,000</small>
+                        </div>
+                        <div class="quick-pay-btn" data-bill="internet">
+                            <i class="fas fa-wifi"></i>
+                            <div>Internet</div>
+                            <small>KSh 1,200</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Money Pulse -->
+                <div class="money-pulse">
+                    <h4><i class="fas fa-heartbeat"></i> Financial Health Pulse</h4>
+                    <div class="pulse-chart">
+                        <canvas id="pulseChart"></canvas>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="summary-value">78%</div>
+                        <div class="summary-label">Overall Financial Health Score</div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Quick Actions</h2>
+                <div class="quick-actions-grid">
+                    <div class="quick-action" id="quick-budget">
+                        <i class="fas fa-wallet"></i>
+                        <span>Manage Budget</span>
+                    </div>
+                    <div class="quick-action" id="quick-bills">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>View Bills</span>
+                    </div>
+                    <div class="quick-action" id="quick-pay">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Pay Bill</span>
+                    </div>
+                    <div class="quick-action" id="quick-ai">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Advisor</span>
+                    </div>
+                </div>
+
+                <!-- Quick AI Insights -->
+                <div class="ai-insights">
+                    <div class="insight-card">
+                        <div class="insight-icon"><i class="fas fa-piggy-bank"></i></div>
+                        <div class="insight-label">Monthly Savings Potential</div>
+                        <div class="insight-value">KSh 3,850</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon"><i class="fas fa-calendar"></i></div>
+                        <div class="insight-label">Days Until Next HELB</div>
+                        <div class="insight-value">42</div>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon"><i class="fas fa-trending-up"></i></div>
+                        <div class="insight-label">Spending Trend</div>
+                        <div class="insight-value">-12%</div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <h2 class="section-title">Recent Transactions</h2>
+                <div class="expense-list">
+                    <div class="expense-header">
+                        <div>Description</div>
+                        <div>Category</div>
+                        <div>Date</div>
+                        <div>Amount</div>
+                        <div>Status</div>
+                    </div>
+                    <div id="recent-transactions">
+                        <!-- Recent transactions will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Advisor Page -->
+            <div id="ai-advisor" class="page">
+                <h2 class="section-title"><i class="fas fa-robot"></i> AI Financial Advisor</h2>
+                
+                <div class="smart-alerts">
+                    <h4><i class="fas fa-comment-alt"></i> Ask AI Advisor</h4>
+                    <div class="form-group">
+                        <input type="text" id="ai-question" class="form-control" placeholder="Ask me anything about your finances, budgeting, or savings...">
+                    </div>
+                    <button class="btn btn-primary" id="ask-ai-btn">
+                        <i class="fas fa-paper-plane"></i> Ask Question
+                    </button>
+                </div>
+
+                <div class="ai-response-area">
+                    <div class="card" style="background: linear-gradient(135deg, #f8fff8, #e8f5e8);">
+                        <h3><i class="fas fa-brain"></i> AI Recommendations</h3>
+                        <div id="ai-recommendations">
+                            <div class="alert-item">
+                                <i class="fas fa-piggy-bank"></i>
+                                <span><strong>Savings Opportunity:</strong> You could save KSh 1,200 monthly by reducing eating out from 10 to 5 times per month</span>
+                            </div>
+                            <div class="alert-item">
+                                <i class="fas fa-chart-line"></i>
+                                <span><strong>Budget Optimization:</strong> Your transport budget is underutilized. Consider reallocating KSh 2,000 to food category</span>
+                            </div>
+                            <div class="alert-item">
+                                <i class="fas fa-lightbulb"></i>
+                                <span><strong>Smart Tip:</strong> Start an emergency fund with 5% of your HELB money. You've saved 32% of your KSh 5,000 goal!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="financial-tips-grid" style="margin-top: 30px;">
+                    <div class="tip-card">
+                        <i class="fas fa-calculator"></i>
+                        <h3>Budget Analysis</h3>
+                        <p>Your current spending pattern shows good discipline in major categories. Focus on optimizing food expenses for better savings.</p>
+                    </div>
+                    <div class="tip-card">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Achievement</h3>
+                        <p>You're in the top 25% of students for financial management. Keep tracking your expenses daily!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Budget Allocation Page -->
+            <div id="budget" class="page">
+                <h2 class="section-title"><i class="fas fa-wallet"></i> Budget Allocation</h2>
+                
+                <div class="budget-summary-card">
+                    <div class="card success">
+                        <h3>Total HELB Funds Available</h3>
+                        <div class="amount">KSh <span id="total-helb-budget">68,000</span></div>
+                        <div class="card-footer">Semester Allocation</div>
+                    </div>
+                </div>
+
+                <div class="savings-goals">
+                    <h3><i class="fas fa-plus-circle"></i> Allocate Funds to Categories</h3>
+                    <div class="form-group">
+                        <label for="category">Select Category</label>
+                        <select id="category" class="form-control">
+                            <option value="">Choose a category...</option>
+                            <option value="tuition">Tuition Fees</option>
+                            <option value="accommodation">Accommodation</option>
+                            <option value="food">Food & Meals</option>
+                            <option value="transport">Transport</option>
+                            <option value="books">Books & Supplies</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="personal">Personal Expenses</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount (KSh)</label>
+                        <input type="number" id="amount" class="form-control" placeholder="Enter amount to allocate">
+                        <small id="available-amount" style="color: var(--success); margin-top: 5px; display: block;"></small>
+                    </div>
+                    <button class="btn btn-primary" id="allocate-btn">
+                        <i class="fas fa-check-circle"></i> Allocate Funds
+                    </button>
+                </div>
+
+                <h3 class="section-title">Current Budget Allocation</h3>
+                <div id="budget-categories-list">
+                    <!-- Budget categories will be dynamically added here -->
+                </div>
+
+                <div class="allocation-summary">
+                    <div class="card info">
+                        <h3>Allocation Summary</h3>
+                        <div class="summary-grid">
+                            <div class="summary-item">
+                                <div class="summary-label">Total Allocated</div>
+                                <div class="summary-value">KSh <span id="allocated-total">0</span></div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Remaining Funds</div>
+                                <div class="summary-value">KSh <span id="remaining-funds">68,000</span></div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Allocation Progress</div>
+                                <div class="summary-value"><span id="allocation-percent">0%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Bills Page -->
+            <div id="bills" class="page">
+                <h2 class="section-title"><i class="fas fa-file-invoice-dollar"></i> My Bills & Payments</h2>
+                
+                <div class="bill-reminder">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Upcoming Bill Reminder</h4>
+                    <p>Internet bill of KSh 1,200 is due in 3 days. Consider paying early to avoid service interruption.</p>
+                </div>
+
+                <div class="bills-list">
+                    <h3>Current Bills</h3>
+                    <div id="bills-container">
+                        <!-- Bills will be dynamically added here -->
+                    </div>
+                </div>
+
+                <div class="payment-history">
+                    <h3 class="section-title">Payment History</h3>
+                    <div class="expense-list">
+                        <div class="expense-header">
+                            <div>Bill Description</div>
+                            <div>Category</div>
+                            <div>Payment Date</div>
+                            <div>Amount</div>
+                            <div>Status</div>
+                        </div>
+                        <div id="payment-history-list">
+                            <!-- Payment history will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Make Payments Page -->
+            <div id="payments" class="page">
+                <h2 class="section-title"><i class="fas fa-credit-card"></i> Make Payments</h2>
+                
+                <div class="savings-goals">
+                    <h3><i class="fas fa-money-check-alt"></i> New Payment</h3>
+                    <div class="form-group">
+                        <label for="payment-category">Payment Category</label>
+                        <select id="payment-category" class="form-control">
+                            <option value="">Select category...</option>
+                            <option value="tuition">Tuition Fees</option>
+                            <option value="accommodation">Accommodation</option>
+                            <option value="food">Food & Meals</option>
+                            <option value="transport">Transport</option>
+                            <option value="books">Books & Supplies</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="personal">Personal Expenses</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-description">Description</label>
+                        <input type="text" id="payment-description" class="form-control" placeholder="Enter payment description">
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-amount">Amount (KSh)</label>
+                        <input type="number" id="payment-amount" class="form-control" placeholder="Enter amount">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div class="payment-methods">
+                            <div class="quick-actions-grid">
+                                <div class="quick-action payment-method active" data-method="mpesa">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>M-Pesa</span>
+                                </div>
+                                <div class="quick-action payment-method" data-method="card">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Card</span>
+                                </div>
+                                <div class="quick-action payment-method" data-method="bank">
+                                    <i class="fas fa-university"></i>
+                                    <span>Bank Transfer</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" id="process-payment">
+                        <i class="fas fa-paper-plane"></i> Process Payment
+                    </button>
+                </div>
+
+                <div class="quick-pay-section" style="margin-top: 30px;">
+                    <h3><i class="fas fa-bolt"></i> Quick Pay Options</h3>
+                    <div class="quick-pay-buttons">
+                        <div class="quick-pay-btn" data-bill="electricity">
+                            <i class="fas fa-bolt"></i>
+                            <div>Electricity</div>
+                            <small>KSh 1,500</small>
+                        </div>
+                        <div class="quick-pay-btn" data-bill="tuition">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>Tuition</div>
+                            <small>KSh 26,000</small>
+                        </div>
+                        <div class="quick-pay-btn" data-bill="rent">
+                            <i class="fas fa-home"></i>
+                            <div>Rent</div>
+                            <small>KSh 9,000</small>
+                        </div>
+                        <div class="quick-pay-btn" data-bill="internet">
+                            <i class="fas fa-wifi"></i>
+                            <div>Internet</div>
+                            <small>KSh 1,200</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expenses Page -->
+            <div id="expenses" class="page">
+                <h2 class="section-title"><i class="fas fa-receipt"></i> Expense Tracking</h2>
+                
+                <div class="savings-goals">
+                    <h3><i class="fas fa-plus-circle"></i> Add New Expense</h3>
+                    <div class="form-group">
+                        <label for="expense-category">Expense Category</label>
+                        <select id="expense-category" class="form-control">
+                            <option value="">Select category...</option>
+                            <option value="tuition">Tuition Fees</option>
+                            <option value="accommodation">Accommodation</option>
+                            <option value="food">Food & Meals</option>
+                            <option value="transport">Transport</option>
+                            <option value="books">Books & Supplies</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="personal">Personal Expenses</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-description">Description</label>
+                        <input type="text" id="expense-description" class="form-control" placeholder="Enter expense description">
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-amount">Amount (KSh)</label>
+                        <input type="number" id="expense-amount" class="form-control" placeholder="Enter amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="expense-date">Date</label>
+                        <input type="date" id="expense-date" class="form-control">
+                    </div>
+                    <button class="btn btn-primary" id="add-expense-btn">
+                        <i class="fas fa-plus-circle"></i> Add Expense
+                    </button>
+                </div>
+
+                <h3 class="section-title">Recent Expenses</h3>
+                <div class="expense-list">
+                    <div class="expense-header">
+                        <div>Description</div>
+                        <div>Category</div>
+                        <div>Date</div>
+                        <div>Amount</div>
+                        <div>Status</div>
+                    </div>
+                    <div id="expenses-list">
+                        <!-- Expenses will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Savings Goals Page -->
+            <div id="savings" class="page">
+                <h2 class="section-title"><i class="fas fa-piggy-bank"></i> Savings Goals</h2>
+                
+                <div class="savings-goals">
+                    <h3><i class="fas fa-bullseye"></i> Create New Savings Goal</h3>
+                    <div class="form-group">
+                        <label for="goal-name">Goal Name</label>
+                        <input type="text" id="goal-name" class="form-control" placeholder="e.g., New Laptop, Emergency Fund">
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-target">Target Amount (KSh)</label>
+                        <input type="number" id="goal-target" class="form-control" placeholder="Enter target amount">
+                    </div>
+                    <div class="form-group">
+                        <label for="goal-deadline">Target Date</label>
+                        <input type="date" id="goal-deadline" class="form-control">
+                    </div>
+                    <button class="btn btn-primary" id="add-goal-btn">
+                        <i class="fas fa-plus-circle"></i> Create Goal
+                    </button>
+                </div>
+
+                <h3 class="section-title">Your Savings Goals</h3>
+                <div id="savings-goals-list">
+                    <!-- Savings goals will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Analytics Page -->
+            <div id="analytics" class="page">
+                <h2 class="section-title"><i class="fas fa-chart-pie"></i> Financial Analytics</h2>
+                
+                <div class="analytics-charts">
+                    <div class="chart-card">
+                        <h3>Spending by Category</h3>
+                        <canvas id="categoryChart" height="250"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Monthly Spending Trend</h3>
+                        <canvas id="trendChart" height="250"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Budget vs Actual</h3>
+                        <canvas id="budgetChart" height="250"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Savings Progress</h3>
+                        <canvas id="savingsChart" height="250"></canvas>
+                    </div>
+                </div>
+
+                <div class="financial-summary">
+                    <h3><i class="fas fa-chart-bar"></i> Key Metrics</h3>
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <div class="summary-label">Monthly Average Spend</div>
+                            <div class="summary-value">KSh 8,617</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Largest Expense</div>
+                            <div class="summary-value">Tuition (KSh 24,700)</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-label">Savings Rate</div>
+                            <div class="summary-value">18%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Financial Tips Page -->
+            <div id="financial-tips" class="page">
+                <h2 class="section-title"><i class="fas fa-lightbulb"></i> Financial Tips for Students</h2>
+                
+                <div class="financial-tips-grid">
+                    <div class="tip-card">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Save on Food</h3>
+                        <p>Cook meals in bulk with friends to save money and time. Eating out regularly can consume a large portion of your budget.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <i class="fas fa-book"></i>
+                        <h3>Textbook Savings</h3>
+                        <p>Buy used textbooks, rent them, or use library copies. Consider digital versions which are often cheaper.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <i class="fas fa-bus"></i>
+                        <h3>Transport Hacks</h3>
+                        <p>Use student discounts on public transport. Walk or bike when possible to save money and stay healthy.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <i class="fas fa-piggy-bank"></i>
+                        <h3>Emergency Fund</h3>
+                        <p>Always set aside 5-10% of your HELB money for unexpected expenses. This prevents you from going into debt.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Track Spending</h3>
+                        <p>Use this app to monitor where your money goes. Small daily expenses add up significantly over time.</p>
+                    </div>
+                    
+                    <div class="tip-card">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        <h3>Part-Time Work</h3>
+                        <p>Consider a part-time job or freelance work that fits your schedule to supplement your HELB funds.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Confirmation Modal -->
+    <div id="payment-confirmation" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-check-circle" style="color: var(--success);"></i> Payment Successful</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Your payment has been processed successfully!</p>
+                <div class="payment-details">
+                    <p><strong>Amount:</strong> KSh <span id="confirm-amount">0</span></p>
+                    <p><strong>Description:</strong> <span id="confirm-description"></span></p>
+                    <p><strong>Transaction ID:</strong> <span id="transaction-id">TXN-</span></p>
+                </div>
+            </div>
+            <div class="modal-footer" style="text-align: right; margin-top: 20px;">
+                <button class="btn btn-primary" id="close-payment-modal">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Budget Warning Modal -->
+    <div id="budget-warning-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title"><i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> Budget Warning</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>This payment will exceed your budget allocation for this category.</p>
+                <div class="budget-details">
+                    <p><strong>Category:</strong> <span id="warning-category"></span></p>
+                    <p><strong>Allocated:</strong> KSh <span id="warning-allocated">0</span></p>
+                    <p><strong>Already Spent:</strong> KSh <span id="warning-spent">0</span></p>
+                    <p><strong>This Payment:</strong> KSh <span id="warning-payment">0</span></p>
+                    <p><strong>Remaining After:</strong> KSh <span id="warning-remaining" style="color: var(--danger); font-weight: bold;">0</span></p>
+                </div>
+            </div>
+            <div class="modal-footer" style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                <button class="btn btn-secondary" id="cancel-payment">Cancel</button>
+                <button class="btn btn-primary" id="proceed-anyway">Proceed Anyway</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced Application State with all features
+        const state = {
+            totalHelb: 68000,
+            allocatedTotal: 0,
+            spentTotal: 25850,
+            availableBalance: 42150,
+            
+            categories: {
+                tuition: {
+                    name: "Tuition Fees",
+                    allocated: 26000,
+                    spent: 24700,
+                    limit: 95,
+                    bills: [
+                        { name: "Semester Tuition", amount: 24700, date: "2023-01-15", status: "paid" }
+                    ]
+                },
+                accommodation: {
+                    name: "Accommodation", 
+                    allocated: 18000,
+                    spent: 9000,
+                    limit: 90,
+                    bills: [
+                        { name: "Hostel Rent", amount: 9000, date: "2023-01-18", status: "paid" }
+                    ]
+                },
+                food: {
+                    name: "Food & Meals",
+                    allocated: 12000, 
+                    spent: 3600,
+                    limit: 85,
+                    bills: []
+                },
+                transport: {
+                    name: "Transport",
+                    allocated: 6000,
+                    spent: 0,
+                    limit: 80,
+                    bills: []
+                },
+                books: {
+                    name: "Books & Supplies",
+                    allocated: 4000,
+                    spent: 2850,
+                    limit: 85,
+                    bills: [
+                        { name: "Textbooks", amount: 2850, date: "2023-01-22", status: "paid" }
+                    ]
+                },
+                utilities: {
+                    name: "Utilities",
+                    allocated: 3000,
+                    spent: 1500,
+                    limit: 80,
+                    bills: [
+                        { name: "Electricity", amount: 1500, date: "2023-01-20", status: "paid" }
+                    ]
+                },
+                personal: {
+                    name: "Personal Expenses",
+                    allocated: 2000,
+                    spent: 1200,
+                    limit: 85,
+                    bills: []
+                }
+            },
+            
+            // Savings Goals
+            savingsGoals: [
+                {
+                    id: 1,
+                    name: "Emergency Fund",
+                    target: 5000,
+                    current: 3200,
+                    deadline: "2023-06-30",
+                    completed: false
+                },
+                {
+                    id: 2,
+                    name: "New Laptop",
+                    target: 80000,
+                    current: 15000,
+                    deadline: "2024-01-31",
+                    completed: false
+                }
+            ],
+            
+            // Payment History
+            paymentHistory: [],
+            
+            // Expenses
+            expenses: []
+        };
+
+        // Initialize the application with all features
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+        });
+
+        function initializeApp() {
+            setupNavigation();
+            setupEventListeners();
+            calculateBudgetTotals();
+            updateAllDisplays();
+            initializeCharts();
+            renderSavingsGoals();
+            setupQuickPayButtons();
+            renderBudgetCategories();
+            renderBills();
+            renderExpenses();
+            renderRecentTransactions();
+            renderPaymentHistory();
+        }
+
+        // Enhanced navigation with all pages
+        function setupNavigation() {
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('.nav-links li');
+            const pageTitle = document.getElementById('page-title');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const pageId = this.getAttribute('data-page');
+                    
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    pages.forEach(page => page.classList.remove('active'));
+                    document.getElementById(pageId).classList.add('active');
+                    
+                    const titles = {
+                        dashboard: 'Student Finance Dashboard',
+                        'ai-advisor': 'AI Financial Advisor',
+                        budget: 'Budget Allocation',
+                        bills: 'My Bills & Payments',
+                        payments: 'Make Payments',
+                        expenses: 'Expense Tracking',
+                        savings: 'Savings Goals',
+                        analytics: 'Financial Analytics',
+                        'financial-tips': 'Financial Tips'
+                    };
+                    pageTitle.textContent = titles[pageId];
+
+                    if (pageId === 'budget') {
+                        updateBudgetAllocationDisplay();
+                    }
+                    if (pageId === 'analytics') {
+                        setTimeout(initializeCharts, 100);
+                    }
+                });
+            });
+        }
+
+        // Enhanced event listeners with all features
+        function setupEventListeners() {
+            // Budget Allocation
+            document.getElementById('allocate-btn').addEventListener('click', addAllocation);
+            document.getElementById('amount').addEventListener('input', validateAllocationAmount);
+            document.getElementById('category').addEventListener('change', updateAvailableForAllocation);
+
+            // Savings Goals
+            document.getElementById('add-goal-btn').addEventListener('click', addSavingsGoal);
+
+            // Quick Actions
+            document.getElementById('quick-budget').addEventListener('click', () => navigateToPage('budget'));
+            document.getElementById('quick-bills').addEventListener('click', () => navigateToPage('bills'));
+            document.getElementById('quick-pay').addEventListener('click', () => navigateToPage('payments'));
+            document.getElementById('quick-ai').addEventListener('click', () => navigateToPage('ai-advisor'));
+
+            // Expense Tracking
+            document.getElementById('add-expense-btn').addEventListener('click', addExpense);
+
+            // Payment System
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            document.getElementById('process-payment').addEventListener('click', processPayment);
+            document.getElementById('close-payment-modal').addEventListener('click', () => {
+                document.getElementById('payment-confirmation').classList.remove('active');
+            });
+
+            // Budget Warning Modal
+            document.getElementById('proceed-anyway').addEventListener('click', proceedWithPayment);
+            document.getElementById('cancel-payment').addEventListener('click', () => {
+                document.getElementById('budget-warning-modal').classList.remove('active');
+            });
+
+            // Real-time amount validation
+            document.getElementById('payment-amount').addEventListener('input', validatePaymentAmount);
+            document.getElementById('payment-category').addEventListener('change', validatePaymentAmount);
+
+            // AI Advisor
+            document.getElementById('ask-ai-btn').addEventListener('click', askAIAdvisor);
+        }
+
+        // Setup Quick Pay Buttons
+        function setupQuickPayButtons() {
+            document.querySelectorAll('.quick-pay-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const billType = this.getAttribute('data-bill');
+                    const amounts = {
+                        electricity: 1500,
+                        tuition: 26000,
+                        rent: 9000,
+                        internet: 1200
+                    };
+                    const descriptions = {
+                        electricity: 'Electricity Bill Payment',
+                        tuition: 'University Tuition Fees',
+                        rent: 'Hostel Rent Payment',
+                        internet: 'Internet Subscription'
+                    };
+                    
+                    // Navigate to payments page and auto-fill
+                    navigateToPage('payments');
+                    setTimeout(() => {
+                        document.getElementById('payment-amount').value = amounts[billType];
+                        document.getElementById('payment-description').value = descriptions[billType];
+                        
+                        // Auto-select category based on bill type
+                        const categoryMap = {
+                            electricity: 'utilities',
+                            tuition: 'tuition',
+                            rent: 'accommodation',
+                            internet: 'utilities'
+                        };
+                        document.getElementById('payment-category').value = categoryMap[billType];
+                    }, 100);
+                });
+            });
+        }
+
+        // Navigation helper
+        function navigateToPage(pageId) {
+            document.querySelectorAll('.nav-links li').forEach(link => link.classList.remove('active'));
+            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+            
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            const titles = {
+                dashboard: 'Student Finance Dashboard',
+                'ai-advisor': 'AI Financial Advisor',
+                budget: 'Budget Allocation',
+                bills: 'My Bills & Payments',
+                payments: 'Make Payments',
+                expenses: 'Expense Tracking',
+                savings: 'Savings Goals',
+                analytics: 'Financial Analytics',
+                'financial-tips': 'Financial Tips'
+            };
+            document.getElementById('page-title').textContent = titles[pageId];
+        }
+
+        // Calculate budget totals
+        function calculateBudgetTotals() {
+            state.allocatedTotal = Object.values(state.categories).reduce((sum, cat) => sum + cat.allocated, 0);
+            state.spentTotal = Object.values(state.categories).reduce((sum, cat) => sum + cat.spent, 0);
+            state.availableBalance = state.totalHelb - state.spentTotal;
+        }
+
+        // Update all displays
+        function updateAllDisplays() {
+            updateDashboard();
+            updateBudgetPage();
+            updatePaymentsPage();
+        }
+
+        // Update Dashboard
+        function updateDashboard() {
+            document.getElementById('total-helb').textContent = state.totalHelb.toLocaleString();
+            document.getElementById('available-balance').textContent = state.availableBalance.toLocaleString();
+            document.getElementById('total-spent').textContent = state.spentTotal.toLocaleString();
+            
+            // Update budget health
+            const budgetHealth = document.getElementById('budget-health');
+            const budgetStatus = document.getElementById('budget-status');
+            
+            const overspentCategories = Object.values(state.categories).filter(cat => cat.spent > cat.allocated);
+            if (overspentCategories.length > 0) {
+                budgetHealth.textContent = 'Needs Attention';
+                budgetHealth.style.color = 'var(--danger)';
+                budgetStatus.textContent = `${overspentCategories.length} categories over budget`;
+            } else {
+                budgetHealth.textContent = 'Good';
+                budgetHealth.style.color = 'var(--success)';
+                budgetStatus.textContent = 'All categories within limits';
+            }
+        }
+
+        // Update Budget Page
+        function updateBudgetPage() {
+            document.getElementById('total-helb-budget').textContent = state.totalHelb.toLocaleString();
+            document.getElementById('allocated-total').textContent = state.allocatedTotal.toLocaleString();
+            document.getElementById('remaining-funds').textContent = (state.totalHelb - state.allocatedTotal).toLocaleString();
+            document.getElementById('allocation-percent').textContent = Math.round((state.allocatedTotal / state.totalHelb) * 100) + '%';
+        }
+
+        // Update Payments Page
+        function updatePaymentsPage() {
+            // Update payment category dropdown
+            const paymentCategory = document.getElementById('payment-category');
+            paymentCategory.innerHTML = '<option value="">Select category...</option>';
+            Object.entries(state.categories).forEach(([key, category]) => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = category.name;
+                paymentCategory.appendChild(option);
+            });
+        }
+
+        // Budget Allocation Functions
+        function updateAvailableForAllocation() {
+            const categorySelect = document.getElementById('category');
+            const amountInput = document.getElementById('amount');
+            const availableAmount = document.getElementById('available-amount');
+            
+            if (categorySelect.value) {
+                const remaining = state.totalHelb - state.allocatedTotal;
+                availableAmount.textContent = `Available for allocation: KSh ${remaining.toLocaleString()}`;
+                amountInput.max = remaining;
+            } else {
+                availableAmount.textContent = '';
+            }
+        }
+
+        function validateAllocationAmount() {
+            const amount = parseInt(document.getElementById('amount').value) || 0;
+            const category = document.getElementById('category').value;
+            const allocateBtn = document.getElementById('allocate-btn');
+            
+            if (amount > 0 && category && amount <= (state.totalHelb - state.allocatedTotal)) {
+                allocateBtn.disabled = false;
+            } else {
+                allocateBtn.disabled = true;
+            }
+        }
+
+        function addAllocation() {
+            const categoryKey = document.getElementById('category').value;
+            const amount = parseInt(document.getElementById('amount').value);
+            
+            if (!categoryKey || !amount) {
+                showNotification('Please select a category and enter an amount', 'error');
+                return;
+            }
+            
+            if (amount > (state.totalHelb - state.allocatedTotal)) {
+                showNotification('Amount exceeds available HELB funds', 'error');
+                return;
+            }
+            
+            state.categories[categoryKey].allocated += amount;
+            calculateBudgetTotals();
+            updateAllDisplays();
+            renderBudgetCategories();
+            
+            // Reset form
+            document.getElementById('category').value = '';
+            document.getElementById('amount').value = '';
+            document.getElementById('available-amount').textContent = '';
+            document.getElementById('allocate-btn').disabled = true;
+            
+            showNotification(`Successfully allocated KSh ${amount.toLocaleString()} to ${state.categories[categoryKey].name}`, 'success');
+        }
+
+        // Render Budget Categories
+        function renderBudgetCategories() {
+            const container = document.getElementById('budget-categories-list');
+            container.innerHTML = '';
+            
+            Object.entries(state.categories).forEach(([key, category]) => {
+                const progress = (category.spent / category.allocated) * 100;
+                const progressClass = progress > 100 ? 'progress-danger' : 
+                                   progress > 80 ? 'progress-warning' : 'progress-safe';
+                
+                const categoryHTML = `
+                    <div class="category-card">
+                        <div class="category-header">
+                            <div class="category-name">${category.name}</div>
+                            <div class="category-amount">KSh ${category.allocated.toLocaleString()}</div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill ${progressClass}" style="width: ${Math.min(progress, 100)}%"></div>
+                        </div>
+                        <div class="progress-label">
+                            <span>Spent: KSh ${category.spent.toLocaleString()}</span>
+                            <span>${progress.toFixed(1)}%</span>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += categoryHTML;
+            });
+        }
+
+        // Render Bills
+        function renderBills() {
+            const container = document.getElementById('bills-container');
+            container.innerHTML = '';
+            
+            Object.entries(state.categories).forEach(([key, category]) => {
+                if (category.bills && category.bills.length > 0) {
+                    category.bills.forEach(bill => {
+                        const billHTML = `
+                            <div class="category-card">
+                                <div class="category-header">
+                                    <div class="category-name">${bill.name}</div>
+                                    <div class="category-amount">KSh ${bill.amount.toLocaleString()}</div>
+                                </div>
+                                <div class="progress-label">
+                                    <span>Due: ${new Date(bill.date).toLocaleDateString()}</span>
+                                    <span class="payment-status status-${bill.status}">${bill.status.charAt(0).toUpperCase() + bill.status.slice(1)}</span>
+                                </div>
+                            </div>
+                        `;
+                        container.innerHTML += billHTML;
+                    });
+                }
+            });
+        }
+
+        // Render Expenses
+        function renderExpenses() {
+            const container = document.getElementById('expenses-list');
+            container.innerHTML = '';
+            
+            const allExpenses = [];
+            Object.entries(state.categories).forEach(([key, category]) => {
+                if (category.bills) {
+                    category.bills.forEach(bill => {
+                        allExpenses.push({
+                            ...bill,
+                            category: category.name
+                        });
+                    });
+                }
+            });
+            
+            // Add some sample expenses
+            const sampleExpenses = [
+                { name: "Groceries", category: "Food & Meals", date: "2023-01-25", amount: 1500, status: "paid" },
+                { name: "Bus Fare", category: "Transport", date: "2023-01-24", amount: 200, status: "paid" },
+                { name: "Stationery", category: "Books & Supplies", date: "2023-01-23", amount: 450, status: "paid" }
+            ];
+            
+            sampleExpenses.forEach(expense => {
+                allExpenses.push(expense);
+            });
+            
+            const sortedExpenses = allExpenses.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            sortedExpenses.forEach(expense => {
+                const expenseHTML = `
+                    <div class="expense-item">
+                        <div>${expense.name}</div>
+                        <div>${expense.category}</div>
+                        <div>${new Date(expense.date).toLocaleDateString()}</div>
+                        <div>KSh ${expense.amount.toLocaleString()}</div>
+                        <div><span class="payment-status status-${expense.status}">${expense.status.charAt(0).toUpperCase() + expense.status.slice(1)}</span></div>
+                    </div>
+                `;
+                container.innerHTML += expenseHTML;
+            });
+        }
+
+        // Render Recent Transactions
+        function renderRecentTransactions() {
+            const container = document.getElementById('recent-transactions');
+            container.innerHTML = '';
+            
+            const allTransactions = [];
+            Object.entries(state.categories).forEach(([key, category]) => {
+                if (category.bills) {
+                    category.bills.forEach(bill => {
+                        allTransactions.push({
+                            ...bill,
+                            category: category.name
+                        });
+                    });
+                }
+            });
+            
+            const recentTransactions = allTransactions
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 5);
+            
+            recentTransactions.forEach(transaction => {
+                const transactionHTML = `
+                    <div class="expense-item">
+                        <div>${transaction.name}</div>
+                        <div>${transaction.category}</div>
+                        <div>${new Date(transaction.date).toLocaleDateString()}</div>
+                        <div>KSh ${transaction.amount.toLocaleString()}</div>
+                        <div><span class="payment-status status-paid">Paid</span></div>
+                    </div>
+                `;
+                container.innerHTML += transactionHTML;
+            });
+        }
+
+        // Render Payment History
+        function renderPaymentHistory() {
+            const container = document.getElementById('payment-history-list');
+            container.innerHTML = '';
+            
+            const allPayments = [];
+            Object.entries(state.categories).forEach(([key, category]) => {
+                if (category.bills) {
+                    category.bills.forEach(bill => {
+                        allPayments.push({
+                            ...bill,
+                            category: category.name
+                        });
+                    });
+                }
+            });
+            
+            const sortedPayments = allPayments.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            sortedPayments.forEach(payment => {
+                const paymentHTML = `
+                    <div class="expense-item">
+                        <div>${payment.name}</div>
+                        <div>${payment.category}</div>
+                        <div>${new Date(payment.date).toLocaleDateString()}</div>
+                        <div>KSh ${payment.amount.toLocaleString()}</div>
+                        <div><span class="payment-status status-${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></div>
+                    </div>
+                `;
+                container.innerHTML += paymentHTML;
+            });
+        }
+
+        // Savings Goals Functions
+        function renderSavingsGoals() {
+            const container = document.getElementById('savings-goals-list');
+            container.innerHTML = '';
+            
+            state.savingsGoals.forEach(goal => {
+                const progress = (goal.current / goal.target) * 100;
+                const goalHTML = `
+                    <div class="goal-item">
+                        <div>
+                            <h4>${goal.name}</h4>
+                            <div>Target: KSh ${goal.target.toLocaleString()} • Deadline: ${new Date(goal.deadline).toLocaleDateString()}</div>
+                        </div>
+                        <div class="goal-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill progress-safe" style="width: ${progress}%"></div>
+                            </div>
+                            <div class="progress-label">
+                                <span>KSh ${goal.current.toLocaleString()} saved</span>
+                                <span>${progress.toFixed(1)}% complete</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="category-amount">KSh ${(goal.target - goal.current).toLocaleString()}</div>
+                            <small style="color: var(--gray);">remaining</small>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += goalHTML;
+            });
+        }
+
+        function addSavingsGoal() {
+            const name = document.getElementById('goal-name').value;
+            const target = parseInt(document.getElementById('goal-target').value);
+            const deadline = document.getElementById('goal-deadline').value;
+            
+            if (!name || !target || !deadline) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (target <= 0) {
+                showNotification('Target amount must be positive', 'error');
+                return;
+            }
+            
+            const newGoal = {
+                id: state.savingsGoals.length + 1,
+                name: name,
+                target: target,
+                current: 0,
+                deadline: deadline,
+                completed: false
+            };
+            
+            state.savingsGoals.push(newGoal);
+            renderSavingsGoals();
+            
+            // Reset form
+            document.getElementById('goal-name').value = '';
+            document.getElementById('goal-target').value = '';
+            document.getElementById('goal-deadline').value = '';
+            
+            showNotification('Savings goal created successfully!', 'success');
+        }
+
+        // Expense Functions
+        function addExpense() {
+            const categoryKey = document.getElementById('expense-category').value;
+            const description = document.getElementById('expense-description').value;
+            const amount = parseInt(document.getElementById('expense-amount').value);
+            const date = document.getElementById('expense-date').value || new Date().toISOString().split('T')[0];
+            
+            if (!categoryKey || !description || !amount) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (amount <= 0) {
+                showNotification('Amount must be positive', 'error');
+                return;
+            }
+            
+            // Check if expense exceeds budget
+            const category = state.categories[categoryKey];
+            const newTotalSpent = category.spent + amount;
+            
+            if (newTotalSpent > category.allocated) {
+                if (!confirm(`This expense will exceed your ${category.name} budget. Do you want to continue?`)) {
+                    return;
+                }
+            }
+            
+            // Add expense
+            if (!category.bills) category.bills = [];
+            category.bills.push({
+                name: description,
+                amount: amount,
+                date: date,
+                status: 'paid'
+            });
+            
+            category.spent += amount;
+            state.spentTotal += amount;
+            state.availableBalance -= amount;
+            
+            calculateBudgetTotals();
+            updateAllDisplays();
+            renderExpenses();
+            renderRecentTransactions();
+            renderPaymentHistory();
+            
+            // Reset form
+            document.getElementById('expense-category').value = '';
+            document.getElementById('expense-description').value = '';
+            document.getElementById('expense-amount').value = '';
+            document.getElementById('expense-date').value = '';
+            
+            showNotification(`Expense of KSh ${amount.toLocaleString()} added successfully`, 'success');
+        }
+
+        // Payment Functions
+        function validatePaymentAmount() {
+            const amount = parseInt(document.getElementById('payment-amount').value) || 0;
+            const category = document.getElementById('payment-category').value;
+            const processBtn = document.getElementById('process-payment');
+            
+            if (amount > 0 && category && amount <= state.availableBalance) {
+                processBtn.disabled = false;
+            } else {
+                processBtn.disabled = true;
+            }
+        }
+
+        function processPayment() {
+            const categoryKey = document.getElementById('payment-category').value;
+            const description = document.getElementById('payment-description').value;
+            const amount = parseInt(document.getElementById('payment-amount').value);
+            const method = document.querySelector('.payment-method.active')?.getAttribute('data-method');
+            
+            if (!categoryKey || !description || !amount || !method) {
+                showNotification('Please fill in all payment details', 'error');
+                return;
+            }
+            
+            if (amount > state.availableBalance) {
+                showNotification('Insufficient funds for this payment', 'error');
+                return;
+            }
+            
+            const category = state.categories[categoryKey];
+            const newTotalSpent = category.spent + amount;
+            
+            // Check if payment exceeds budget
+            if (newTotalSpent > category.allocated) {
+                showBudgetWarning(category, amount);
+                return;
+            }
+            
+            completePayment(categoryKey, description, amount, method);
+        }
+
+        function showBudgetWarning(category, amount) {
+            document.getElementById('warning-category').textContent = category.name;
+            document.getElementById('warning-allocated').textContent = category.allocated.toLocaleString();
+            document.getElementById('warning-spent').textContent = category.spent.toLocaleString();
+            document.getElementById('warning-payment').textContent = amount.toLocaleString();
+            document.getElementById('warning-remaining').textContent = (category.allocated - (category.spent + amount)).toLocaleString();
+            
+            document.getElementById('budget-warning-modal').classList.add('active');
+        }
+
+        function proceedWithPayment() {
+            const categoryKey = document.getElementById('payment-category').value;
+            const description = document.getElementById('payment-description').value;
+            const amount = parseInt(document.getElementById('payment-amount').value);
+            const method = document.querySelector('.payment-method.active')?.getAttribute('data-method');
+            
+            completePayment(categoryKey, description, amount, method);
+            document.getElementById('budget-warning-modal').classList.remove('active');
+        }
+
+        function completePayment(categoryKey, description, amount, method) {
+            const category = state.categories[categoryKey];
+            
+            // Add to bills
+            if (!category.bills) category.bills = [];
+            category.bills.push({
+                name: description,
+                amount: amount,
+                date: new Date().toISOString().split('T')[0],
+                status: 'paid'
+            });
+            
+            // Update totals
+            category.spent += amount;
+            state.spentTotal += amount;
+            state.availableBalance -= amount;
+            
+            calculateBudgetTotals();
+            updateAllDisplays();
+            renderBills();
+            renderRecentTransactions();
+            renderPaymentHistory();
+            
+            // Show confirmation
+            document.getElementById('confirm-amount').textContent = amount.toLocaleString();
+            document.getElementById('confirm-description').textContent = description;
+            document.getElementById('transaction-id').textContent = 'TXN-' + Date.now();
+            document.getElementById('payment-confirmation').classList.add('active');
+            
+            // Reset form
+            document.getElementById('payment-category').value = '';
+            document.getElementById('payment-description').value = '';
+            document.getElementById('payment-amount').value = '';
+            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+            document.querySelector('.payment-method').classList.add('active');
+            document.getElementById('process-payment').disabled = true;
+            
+            showNotification(`Payment of KSh ${amount.toLocaleString()} processed successfully`, 'success');
+        }
+
+        // AI Advisor Function
+        function askAIAdvisor() {
+            const question = document.getElementById('ai-question').value;
+            
+            if (!question.trim()) {
+                showNotification('Please enter a question for the AI advisor', 'error');
+                return;
+            }
+            
+            // Simulate AI response
+            const responses = [
+                "Based on your spending patterns, I recommend increasing your food budget allocation by 10% to avoid overspending.",
+                "Your savings rate is excellent! Consider investing 20% of your emergency fund in a low-risk savings account.",
+                "I notice you're underutilizing your transport budget. You could reallocate KSh 1,500 to other categories.",
+                "Your financial health score is 78%. To improve it, try to reduce discretionary spending by 15% this month.",
+                "Based on similar students, you're spending 12% less on accommodation. Great job optimizing your living costs!"
+            ];
+            
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            
+            // Add response to AI recommendations
+            const recommendationsContainer = document.getElementById('ai-recommendations');
+            const newRecommendation = `
+                <div class="alert-item">
+                    <i class="fas fa-robot"></i>
+                    <span><strong>AI Response:</strong> ${randomResponse}</span>
+                </div>
+            `;
+            recommendationsContainer.innerHTML = newRecommendation + recommendationsContainer.innerHTML;
+            
+            // Clear question
+            document.getElementById('ai-question').value = '';
+            
+            showNotification('AI advisor has responded to your question', 'success');
+        }
+
+        // Enhanced Charts
+        function initializeCharts() {
+            // Category Chart
+            const categoryCtx = document.getElementById('categoryChart')?.getContext('2d');
+            if (categoryCtx) {
+                new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.values(state.categories).map(cat => cat.name),
+                        datasets: [{
+                            data: Object.values(state.categories).map(cat => cat.spent),
+                            backgroundColor: [
+                                '#1a5f2a', '#28a745', '#ffc107', '#dc3545', 
+                                '#6f42c1', '#fd7e14', '#20c997'
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#ffffff'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { 
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true
+                                }
+                            }
+                        },
+                        cutout: '60%'
+                    }
+                });
+            }
+
+            // Trend Chart
+            const trendCtx = document.getElementById('trendChart')?.getContext('2d');
+            if (trendCtx) {
+                new Chart(trendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Monthly Spending',
+                            data: [25850, 21500, 18900, 0, 0, 0],
+                            borderColor: '#1a5f2a',
+                            backgroundColor: 'rgba(26, 95, 42, 0.1)',
+                            tension: 0.3,
+                            fill: true,
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { 
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0,0,0,0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(0,0,0,0.1)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Budget vs Actual Chart
+            const budgetCtx = document.getElementById('budgetChart')?.getContext('2d');
+            if (budgetCtx) {
+                const categories = Object.values(state.categories);
+                new Chart(budgetCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: categories.map(cat => cat.name.split(' ')[0]),
+                        datasets: [
+                            {
+                                label: 'Allocated',
+                                data: categories.map(cat => cat.allocated),
+                                backgroundColor: 'rgba(26, 95, 42, 0.7)',
+                                borderColor: '#1a5f2a',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Spent',
+                                data: categories.map(cat => cat.spent),
+                                backgroundColor: 'rgba(40, 167, 69, 0.7)',
+                                borderColor: '#28a745',
+                                borderWidth: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: { 
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0,0,0,0.1)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Pulse Chart (Financial Health)
+            const pulseCtx = document.getElementById('pulseChart')?.getContext('2d');
+            if (pulseCtx) {
+                new Chart(pulseCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Financial Health'],
+                        datasets: [{
+                            data: [78, 22],
+                            backgroundColor: ['#28a745', '#e9ecef'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        cutout: '80%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { enabled: false }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Utility Functions
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            notification.style.background = type === 'error' ? 'var(--danger)' : 
+                                          type === 'success' ? 'var(--success)' : 'var(--info)';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 4000);
+        }
+
+        function updateBudgetAllocationDisplay() {
+            // This function is called when budget page is activated
+            renderBudgetCategories();
+            updateAvailableForAllocation();
+        }
+    </script>
+</body>
+</html>
