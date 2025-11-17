@@ -47,6 +47,285 @@
             line-height: 1.6;
         }
 
+        /* Login System Styles */
+        .login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .login-container.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-logo {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .login-title {
+            color: var(--primary-dark);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .login-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        .login-tab {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .login-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .login-form {
+            display: none;
+        }
+
+        .login-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .login-footer {
+            margin-top: 20px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .demo-accounts {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8fff8;
+            border-radius: 10px;
+            border-left: 4px solid var(--success);
+        }
+
+        .demo-account {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .demo-account:hover {
+            border-color: var(--primary);
+            background: #f8fff8;
+        }
+
+        /* Password Reset Styles */
+        .reset-steps {
+            display: none;
+        }
+
+        .reset-steps.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .reset-success {
+            text-align: center;
+            padding: 20px;
+            background: #d4edda;
+            border-radius: 10px;
+            border-left: 4px solid var(--success);
+            margin: 20px 0;
+        }
+
+        .reset-success i {
+            font-size: 3rem;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        /* Profile Settings Styles */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light);
+        }
+
+        .profile-avatar-large {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .profile-info h2 {
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: var(--gray);
+        }
+
+        .settings-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .settings-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-options {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .avatar-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+        }
+
+        .avatar-option:hover {
+            transform: scale(1.1);
+        }
+
+        .avatar-option.selected {
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 2px var(--success-light);
+        }
+
+        .danger-zone {
+            border-left: 4px solid var(--danger);
+        }
+
+        .danger-zone h3 {
+            color: var(--danger);
+        }
+
+        /* Data Export Styles */
+        .export-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .export-option {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .export-option:hover {
+            transform: translateY(-3px);
+            border-color: var(--success-light);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .export-option.selected {
+            border-color: var(--success);
+            background: #f8fff8;
+        }
+
+        .export-option i {
+            font-size: 2.5rem;
+            color: var(--success);
+            margin-bottom: 15px;
+        }
+
+        .export-format {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .export-format:hover {
+            border-color: var(--primary);
+            background: #f8fff8;
+        }
+
+        .export-format.selected {
+            border-color: var(--success);
+            background: #f8fff8;
+        }
+
+        /* Main App Container */
         .container {
             display: flex;
             min-height: 100vh;
@@ -742,6 +1021,96 @@
             color: var(--danger);
         }
 
+        /* Enhanced Form Validation Styles */
+        .form-control.invalid {
+            border-color: var(--danger);
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+        }
+
+        .form-control.valid {
+            border-color: var(--success);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+
+        .validation-message {
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .validation-message.error {
+            color: var(--danger);
+        }
+
+        .validation-message.success {
+            color: var(--success);
+        }
+
+        /* Loading States */
+        .loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid #f3f3f3;
+            border-top: 2px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Enhanced Button States */
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Improved Modal Backdrop */
+        .modal {
+            backdrop-filter: blur(5px);
+        }
+
+        /* Better Responsive Tables */
+        @media (max-width: 768px) {
+            .expense-header {
+                display: none;
+            }
+            
+            .expense-item {
+                display: block;
+                padding: 15px;
+                border-bottom: 1px solid var(--light);
+            }
+            
+            .expense-item > div {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 8px;
+            }
+            
+            .expense-item > div::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: var(--gray);
+            }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .container {
@@ -805,10 +1174,143 @@
             z-index: 1001;
             animation: slideIn 0.3s ease;
         }
+
+        .notification.error {
+            background: var(--danger);
+        }
+
+        .notification.info {
+            background: var(--info);
+        }
+
+        .notification.warning {
+            background: var(--warning);
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Login System -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-box">
+            <div class="login-logo">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <h1 class="login-title">HELB Smart Budget</h1>
+            
+            <div class="login-tabs">
+                <button class="login-tab active" data-tab="login">Login</button>
+                <button class="login-tab" data-tab="signup">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="login-form active">
+                <div class="form-group">
+                    <input type="email" id="loginEmail" class="form-control" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt"></i> Login to Dashboard
+                </button>
+                
+                <div class="demo-accounts">
+                    <p style="margin-bottom: 10px; color: var(--gray); font-size: 0.9rem;">
+                        <i class="fas fa-lightbulb"></i> Try demo accounts:
+                    </p>
+                    <div class="demo-account" data-email="student@uon.ac.ke" data-password="demo123">
+                        <strong>John Kariuki</strong> - University of Nairobi
+                    </div>
+                    <div class="demo-account" data-email="mary@ku.ac.ke" data-password="demo123">
+                        <strong>Mary Wanjiku</strong> - Kenyatta University
+                    </div>
+                    <div class="demo-account" data-email="peter@jkuat.ac.ke" data-password="demo123">
+                        <strong>Peter Kamau</strong> - JKUAT
+                    </div>
+                </div>
+                
+                <!-- Forgot Password Link -->
+                <div style="text-align: center; margin-top: 15px;">
+                    <a href="#" class="forgot-password" style="color: var(--primary); text-decoration: none; font-size: 0.9rem;">
+                        <i class="fas fa-key"></i> Forgot Password?
+                    </a>
+                </div>
+            </form>
+
+            <!-- Signup Form -->
+            <form id="signupForm" class="login-form">
+                <div class="form-group">
+                    <input type="text" id="signupName" class="form-control" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="signupEmail" class="form-control" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="signupUniversity" class="form-control" placeholder="University" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signupPassword" class="form-control" placeholder="Create Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signupConfirmPassword" class="form-control" placeholder="Confirm Password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+
+            <!-- Password Reset Form -->
+            <form id="resetForm" class="login-form">
+                <div class="reset-steps active" id="resetStep1">
+                    <div class="form-group">
+                        <label for="resetEmail">Enter your email address</label>
+                        <input type="email" id="resetEmail" class="form-control" placeholder="your-email@university.ac.ke" required>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="sendResetCode" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Send Reset Code
+                    </button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="#" class="back-to-login" style="color: var(--primary); text-decoration: none;">
+                            <i class="fas fa-arrow-left"></i> Back to Login
+                        </a>
+                    </div>
+                </div>
+
+                <div class="reset-steps" id="resetStep2">
+                    <div class="form-group">
+                        <label for="resetCode">Enter reset code</label>
+                        <input type="text" id="resetCode" class="form-control" placeholder="Enter 6-digit code" maxlength="6" required>
+                        <small style="color: var(--gray);">Check your email for the reset code</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" class="form-control" placeholder="Enter new password" required>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="resetPassword" style="width: 100%;">
+                        <i class="fas fa-lock"></i> Reset Password
+                    </button>
+                </div>
+
+                <div class="reset-steps" id="resetSuccess">
+                    <div class="reset-success">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Password Reset Successful!</h3>
+                        <p>Your password has been updated successfully.</p>
+                        <button type="button" class="btn btn-primary" id="goToLogin">
+                            <i class="fas fa-sign-in-alt"></i> Go to Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="login-footer">
+                <p>By continuing, you agree to our <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="appContainer" class="container" style="display: none;">
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
@@ -824,6 +1326,11 @@
                 <li data-page="savings"><i class="fas fa-piggy-bank"></i> Savings Goals</li>
                 <li data-page="analytics"><i class="fas fa-chart-pie"></i> Analytics</li>
                 <li data-page="financial-tips"><i class="fas fa-lightbulb"></i> Financial Tips</li>
+                <li data-page="data-export"><i class="fas fa-download"></i> Data Export</li>
+                <li data-page="profile-settings"><i class="fas fa-user-cog"></i> Profile Settings</li>
+                <li id="logoutBtn" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 20px; padding-top: 20px;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </li>
             </ul>
         </div>
 
@@ -832,10 +1339,10 @@
             <div class="header">
                 <h1 id="page-title">Student Finance Dashboard</h1>
                 <div class="user-info">
-                    <div class="avatar">JK</div>
+                    <div class="avatar" id="userAvatar">JK</div>
                     <div>
-                        <div class="user-name">John Kariuki</div>
-                        <div class="user-status">University of Nairobi</div>
+                        <div class="user-name" id="userDisplayName">John Kariuki</div>
+                        <div class="user-status" id="userUniversity">University of Nairobi</div>
                     </div>
                 </div>
             </div>
@@ -1360,6 +1867,148 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Profile Settings Page -->
+            <div id="profile-settings" class="page">
+                <h2 class="section-title"><i class="fas fa-user-cog"></i> Profile Settings</h2>
+                
+                <div class="profile-header">
+                    <div class="profile-avatar-large" id="profileAvatarLarge">JK</div>
+                    <div class="profile-info">
+                        <h2 id="profileUserName">John Kariuki</h2>
+                        <p id="profileUserEmail">student@uon.ac.ke</p>
+                        <p id="profileUserUniversity">University of Nairobi</p>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3><i class="fas fa-user-edit"></i> Personal Information</h3>
+                    <div class="form-group">
+                        <label for="editName">Full Name</label>
+                        <input type="text" id="editName" class="form-control" value="John Kariuki">
+                    </div>
+                    <div class="form-group">
+                        <label for="editUniversity">University</label>
+                        <input type="text" id="editUniversity" class="form-control" value="University of Nairobi">
+                    </div>
+                    <div class="form-group">
+                        <label>Profile Avatar</label>
+                        <div class="avatar-options">
+                            <div class="avatar-option selected" data-avatar="JK">JK</div>
+                            <div class="avatar-option" data-avatar="US">US</div>
+                            <div class="avatar-option" data-avatar="ST">ST</div>
+                            <div class="avatar-option" data-avatar="HE">HE</div>
+                            <div class="avatar-option" data-avatar="LB">LB</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="saveProfile">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+
+                <div class="settings-section">
+                    <h3><i class="fas fa-lock"></i> Security</h3>
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" id="currentPassword" class="form-control" placeholder="Enter current password">
+                    </div>
+                    <div class="form-group">
+                        <label for="newProfilePassword">New Password</label>
+                        <input type="password" id="newProfilePassword" class="form-control" placeholder="Enter new password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" class="form-control" placeholder="Confirm new password">
+                    </div>
+                    <button class="btn btn-primary" id="changePassword">
+                        <i class="fas fa-key"></i> Change Password
+                    </button>
+                </div>
+
+                <div class="settings-section danger-zone">
+                    <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">
+                        Once you delete your account, there is no going back. Please be certain.
+                    </p>
+                    <button class="btn" style="background: var(--danger); color: white;" id="deleteAccount">
+                        <i class="fas fa-trash"></i> Delete My Account
+                    </button>
+                </div>
+            </div>
+
+            <!-- Data Export Page -->
+            <div id="data-export" class="page">
+                <h2 class="section-title"><i class="fas fa-download"></i> Data Export</h2>
+                
+                <div class="settings-section">
+                    <h3><i class="fas fa-file-export"></i> Export Your Financial Data</h3>
+                    <p style="color: var(--gray); margin-bottom: 20px;">
+                        Download your financial data for record keeping, analysis, or sharing with financial advisors.
+                    </p>
+
+                    <div class="export-options">
+                        <div class="export-option selected" data-type="transactions">
+                            <i class="fas fa-receipt"></i>
+                            <h4>Transactions</h4>
+                            <p>All your payments and expenses</p>
+                        </div>
+                        <div class="export-option" data-type="budget">
+                            <i class="fas fa-wallet"></i>
+                            <h4>Budget</h4>
+                            <p>Budget allocations and spending</p>
+                        </div>
+                        <div class="export-option" data-type="savings">
+                            <i class="fas fa-piggy-bank"></i>
+                            <h4>Savings Goals</h4>
+                            <p>Savings progress and targets</p>
+                        </div>
+                        <div class="export-option" data-type="all">
+                            <i class="fas fa-archive"></i>
+                            <h4>Complete Data</h4>
+                            <p>All your financial data</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Export Format</label>
+                        <div class="export-format selected" data-format="csv">
+                            <i class="fas fa-file-csv" style="color: var(--success);"></i>
+                            <div>
+                                <strong>CSV Format</strong>
+                                <small style="color: var(--gray);">Compatible with Excel and Google Sheets</small>
+                            </div>
+                        </div>
+                        <div class="export-format" data-format="pdf">
+                            <i class="fas fa-file-pdf" style="color: var(--danger);"></i>
+                            <div>
+                                <strong>PDF Report</strong>
+                                <small style="color: var(--gray);">Printable formatted report</small>
+                            </div>
+                        </div>
+                        <div class="export-format" data-format="json">
+                            <i class="fas fa-file-code" style="color: var(--info);"></i>
+                            <div>
+                                <strong>JSON Data</strong>
+                                <small style="color: var(--gray);">For developers and analysis</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="exportData" style="width: 100%;">
+                        <i class="fas fa-download"></i> Export Data
+                    </button>
+                </div>
+
+                <div class="settings-section">
+                    <h3><i class="fas fa-history"></i> Export History</h3>
+                    <div id="exportHistory">
+                        <p style="color: var(--gray); text-align: center; padding: 40px;">
+                            <i class="fas fa-clock" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                            No export history yet
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1409,7 +2058,619 @@
     </div>
 
     <script>
-        // Enhanced Application State with all features
+        // ===== LOGIN SYSTEM =====
+        const userAccounts = {
+            'student@uon.ac.ke': {
+                password: 'demo123',
+                name: 'John Kariuki',
+                university: 'University of Nairobi',
+                avatar: 'JK'
+            },
+            'mary@ku.ac.ke': {
+                password: 'demo123',
+                name: 'Mary Wanjiku',
+                university: 'Kenyatta University',
+                avatar: 'MW'
+            },
+            'peter@jkuat.ac.ke': {
+                password: 'demo123',
+                name: 'Peter Kamau',
+                university: 'JKUAT',
+                avatar: 'PK'
+            }
+        };
+
+        let currentUser = null;
+
+        function initializeLoginSystem() {
+            setupLoginEventListeners();
+            setupPasswordReset();
+            setupProfileSettings();
+            setupDataExport();
+            checkExistingSession();
+        }
+
+        function setupLoginEventListeners() {
+            document.querySelectorAll('.login-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    document.querySelectorAll('.login-tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.login-form').forEach(form => form.classList.remove('active'));
+                    document.getElementById(tabName + 'Form').classList.add('active');
+                });
+            });
+
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleLogin();
+            });
+
+            document.getElementById('signupForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                handleSignup();
+            });
+
+            document.querySelectorAll('.demo-account').forEach(account => {
+                account.addEventListener('click', function() {
+                    const email = this.getAttribute('data-email');
+                    const password = this.getAttribute('data-password');
+                    document.getElementById('loginEmail').value = email;
+                    document.getElementById('loginPassword').value = password;
+                    setTimeout(() => handleLogin(), 500);
+                });
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+        }
+
+        // ===== PASSWORD RESET FUNCTIONALITY =====
+        function setupPasswordReset() {
+            // Forgot password link
+            document.querySelector('.forgot-password').addEventListener('click', function(e) {
+                e.preventDefault();
+                showResetForm();
+            });
+
+            document.querySelector('.back-to-login').addEventListener('click', function(e) {
+                e.preventDefault();
+                showLoginForm();
+            });
+
+            document.getElementById('sendResetCode').addEventListener('click', sendResetCode);
+            document.getElementById('resetPassword').addEventListener('click', resetPassword);
+            document.getElementById('goToLogin').addEventListener('click', showLoginForm);
+        }
+
+        function showResetForm() {
+            document.querySelectorAll('.login-form').forEach(form => form.classList.remove('active'));
+            document.getElementById('resetForm').classList.add('active');
+            showResetStep(1);
+        }
+
+        function showLoginForm() {
+            document.querySelectorAll('.login-form').forEach(form => form.classList.remove('active'));
+            document.getElementById('loginForm').classList.add('active');
+            document.querySelector('.login-tab.active').click();
+        }
+
+        function showResetStep(step) {
+            document.querySelectorAll('.reset-steps').forEach(step => step.classList.remove('active'));
+            document.getElementById(`resetStep${step}`).classList.add('active');
+        }
+
+        function sendResetCode() {
+            const email = document.getElementById('resetEmail').value;
+            
+            if (!email) {
+                showNotification('Please enter your email address', 'error');
+                return;
+            }
+
+            if (!userAccounts[email]) {
+                showNotification('No account found with this email address', 'error');
+                return;
+            }
+
+            // Simulate sending reset code
+            const resetCode = Math.floor(100000 + Math.random() * 900000).toString();
+            userAccounts[email].resetCode = resetCode;
+            userAccounts[email].resetCodeExpiry = Date.now() + 10 * 60 * 1000; // 10 minutes
+
+            showNotification(`Reset code sent to ${email} (Demo: ${resetCode})`, 'success');
+            showResetStep(2);
+        }
+
+        function resetPassword() {
+            const email = document.getElementById('resetEmail').value;
+            const code = document.getElementById('resetCode').value;
+            const newPassword = document.getElementById('newPassword').value;
+
+            if (!code || !newPassword) {
+                showNotification('Please enter reset code and new password', 'error');
+                return;
+            }
+
+            if (newPassword.length < 6) {
+                showNotification('Password must be at least 6 characters', 'error');
+                return;
+            }
+
+            const user = userAccounts[email];
+            if (!user || user.resetCode !== code) {
+                showNotification('Invalid reset code', 'error');
+                return;
+            }
+
+            if (user.resetCodeExpiry && Date.now() > user.resetCodeExpiry) {
+                showNotification('Reset code has expired', 'error');
+                return;
+            }
+
+            // Update password
+            user.password = newPassword;
+            delete user.resetCode;
+            delete user.resetCodeExpiry;
+
+            showResetStep(3);
+            showNotification('Password reset successfully!', 'success');
+        }
+
+        // ===== USER PROFILE FUNCTIONALITY =====
+        function setupProfileSettings() {
+            // Profile event listeners
+            document.getElementById('saveProfile').addEventListener('click', saveProfile);
+            document.getElementById('changePassword').addEventListener('click', changePassword);
+            document.getElementById('deleteAccount').addEventListener('click', deleteAccount);
+            
+            // Avatar selection
+            document.querySelectorAll('.avatar-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.avatar-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+        }
+
+        function loadProfileData() {
+            if (!currentUser) return;
+            
+            // Update profile page
+            document.getElementById('profileUserName').textContent = currentUser.name;
+            document.getElementById('profileUserEmail').textContent = currentUser.email;
+            document.getElementById('profileUserUniversity').textContent = currentUser.university;
+            document.getElementById('profileAvatarLarge').textContent = currentUser.avatar;
+            
+            // Update form fields
+            document.getElementById('editName').value = currentUser.name;
+            document.getElementById('editUniversity').value = currentUser.university;
+            
+            // Set selected avatar
+            document.querySelectorAll('.avatar-option').forEach(option => {
+                option.classList.remove('selected');
+                if (option.getAttribute('data-avatar') === currentUser.avatar) {
+                    option.classList.add('selected');
+                }
+            });
+        }
+
+        function saveProfile() {
+            if (!currentUser) return;
+            
+            const newName = document.getElementById('editName').value;
+            const newUniversity = document.getElementById('editUniversity').value;
+            const selectedAvatar = document.querySelector('.avatar-option.selected').getAttribute('data-avatar');
+            
+            if (!newName || !newUniversity) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+            
+            // Update user data
+            currentUser.name = newName;
+            currentUser.university = newUniversity;
+            currentUser.avatar = selectedAvatar;
+            
+            // Update accounts storage
+            userAccounts[currentUser.email] = currentUser;
+            localStorage.setItem('helbCurrentUser', JSON.stringify(currentUser));
+            
+            // Update UI
+            document.getElementById('userDisplayName').textContent = newName;
+            document.getElementById('userUniversity').textContent = newUniversity;
+            document.getElementById('userAvatar').textContent = selectedAvatar;
+            
+            showNotification('Profile updated successfully!', 'success');
+        }
+
+        function changePassword() {
+            if (!currentUser) return;
+            
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newProfilePassword').value;
+            const confirmPassword = document.getElementById('confirmNewPassword').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                showNotification('Please fill in all password fields', 'error');
+                return;
+            }
+            
+            if (currentPassword !== userAccounts[currentUser.email].password) {
+                showNotification('Current password is incorrect', 'error');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                showNotification('New password must be at least 6 characters', 'error');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                showNotification('New passwords do not match', 'error');
+                return;
+            }
+            
+            // Update password
+            userAccounts[currentUser.email].password = newPassword;
+            currentUser.password = newPassword;
+            localStorage.setItem('helbCurrentUser', JSON.stringify(currentUser));
+            
+            // Clear fields
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newProfilePassword').value = '';
+            document.getElementById('confirmNewPassword').value = '';
+            
+            showNotification('Password changed successfully!', 'success');
+        }
+
+        function deleteAccount() {
+            if (!currentUser) return;
+            
+            if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+                if (confirm('This will permanently delete all your data. Type "DELETE" to confirm:')) {
+                    // Remove from accounts
+                    delete userAccounts[currentUser.email];
+                    localStorage.removeItem('helbCurrentUser');
+                    currentUser = null;
+                    
+                    showLogin();
+                    showNotification('Account deleted successfully', 'info');
+                }
+            }
+        }
+
+        // ===== DATA EXPORT FUNCTIONALITY =====
+        function setupDataExport() {
+            // Export option selection
+            document.querySelectorAll('.export-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.export-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // Format selection
+            document.querySelectorAll('.export-format').forEach(format => {
+                format.addEventListener('click', function() {
+                    document.querySelectorAll('.export-format').forEach(f => f.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+
+            // Export button
+            document.getElementById('exportData').addEventListener('click', exportData);
+        }
+
+        function exportData() {
+            const selectedType = document.querySelector('.export-option.selected')?.getAttribute('data-type') || 'transactions';
+            const selectedFormat = document.querySelector('.export-format.selected')?.getAttribute('data-format') || 'csv';
+            
+            if (!currentUser) return;
+
+            // Prepare data based on selection
+            let data = {};
+            switch (selectedType) {
+                case 'transactions':
+                    data = prepareTransactionData();
+                    break;
+                case 'budget':
+                    data = prepareBudgetData();
+                    break;
+                case 'savings':
+                    data = prepareSavingsData();
+                    break;
+                case 'all':
+                    data = prepareAllData();
+                    break;
+            }
+
+            // Export based on format
+            switch (selectedFormat) {
+                case 'csv':
+                    exportToCSV(data, selectedType);
+                    break;
+                case 'pdf':
+                    exportToPDF(data, selectedType);
+                    break;
+                case 'json':
+                    exportToJSON(data, selectedType);
+                    break;
+            }
+
+            // Add to export history
+            addToExportHistory(selectedType, selectedFormat);
+            showNotification(`Data exported as ${selectedFormat.toUpperCase()}`, 'success');
+        }
+
+        function prepareTransactionData() {
+            const transactions = [];
+            Object.values(state.categories).forEach(category => {
+                if (category.bills) {
+                    category.bills.forEach(bill => {
+                        transactions.push({
+                            Description: bill.name,
+                            Category: category.name,
+                            Amount: `KSh ${bill.amount}`,
+                            Date: bill.date,
+                            Status: bill.status
+                        });
+                    });
+                }
+            });
+            return transactions;
+        }
+
+        function prepareBudgetData() {
+            return Object.values(state.categories).map(category => ({
+                Category: category.name,
+                Allocated: `KSh ${category.allocated}`,
+                Spent: `KSh ${category.spent}`,
+                Remaining: `KSh ${category.allocated - category.spent}`,
+                Utilization: `${((category.spent / category.allocated) * 100).toFixed(1)}%`
+            }));
+        }
+
+        function prepareSavingsData() {
+            return state.savingsGoals.map(goal => ({
+                Goal: goal.name,
+                Target: `KSh ${goal.target}`,
+                Saved: `KSh ${goal.current}`,
+                Remaining: `KSh ${goal.target - goal.current}`,
+                Progress: `${((goal.current / goal.target) * 100).toFixed(1)}%`,
+                Deadline: goal.deadline
+            }));
+        }
+
+        function prepareAllData() {
+            return {
+                user: currentUser,
+                transactions: prepareTransactionData(),
+                budget: prepareBudgetData(),
+                savings: prepareSavingsData(),
+                summary: {
+                    totalHelb: state.totalHelb,
+                    totalSpent: state.spentTotal,
+                    availableBalance: state.availableBalance
+                },
+                exportDate: new Date().toISOString()
+            };
+        }
+
+        function exportToCSV(data, type) {
+            let csvContent = '';
+            
+            if (Array.isArray(data)) {
+                // Headers
+                const headers = Object.keys(data[0]);
+                csvContent += headers.join(',') + '\n';
+                
+                // Rows
+                data.forEach(row => {
+                    const values = headers.map(header => `"${row[header]}"`);
+                    csvContent += values.join(',') + '\n';
+                });
+            } else {
+                // For nested data (all export)
+                csvContent = 'Data Type,Details\n';
+                Object.entries(data).forEach(([key, value]) => {
+                    if (Array.isArray(value)) {
+                        csvContent += `${key},${value.length} records\n`;
+                    } else {
+                        csvContent += `${key},"${JSON.stringify(value)}"\n`;
+                    }
+                });
+            }
+            
+            downloadFile(csvContent, `helb-${type}-${new Date().toISOString().split('T')[0]}.csv`, 'text/csv');
+        }
+
+        function exportToJSON(data, type) {
+            const jsonContent = JSON.stringify(data, null, 2);
+            downloadFile(jsonContent, `helb-${type}-${new Date().toISOString().split('T')[0]}.json`, 'application/json');
+        }
+
+        function exportToPDF(data, type) {
+            // Simple PDF simulation - in real app, use a library like jsPDF
+            let pdfContent = `HELB Smart Budget Export\n`;
+            pdfContent += `Generated: ${new Date().toLocaleString()}\n`;
+            pdfContent += `User: ${currentUser.name}\n`;
+            pdfContent += `Type: ${type}\n\n`;
+            
+            if (Array.isArray(data)) {
+                data.forEach(item => {
+                    Object.entries(item).forEach(([key, value]) => {
+                        pdfContent += `${key}: ${value}\n`;
+                    });
+                    pdfContent += '---\n';
+                });
+            } else {
+                pdfContent += JSON.stringify(data, null, 2);
+            }
+            
+            downloadFile(pdfContent, `helb-${type}-${new Date().toISOString().split('T')[0]}.txt`, 'text/plain');
+        }
+
+        function downloadFile(content, filename, mimeType) {
+            const blob = new Blob([content], { type: mimeType });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function addToExportHistory(type, format) {
+            const history = JSON.parse(localStorage.getItem('exportHistory') || '[]');
+            history.unshift({
+                type: type,
+                format: format,
+                date: new Date().toISOString(),
+                filename: `helb-${type}-${new Date().toISOString().split('T')[0]}.${format}`
+            });
+            
+            // Keep only last 10 exports
+            if (history.length > 10) history.pop();
+            
+            localStorage.setItem('exportHistory', JSON.stringify(history));
+            renderExportHistory();
+        }
+
+        function renderExportHistory() {
+            const history = JSON.parse(localStorage.getItem('exportHistory') || '[]');
+            const container = document.getElementById('exportHistory');
+            
+            if (history.length === 0) {
+                container.innerHTML = `
+                    <p style="color: var(--gray); text-align: center; padding: 40px;">
+                        <i class="fas fa-clock" style="font-size: 2rem; margin-bottom: 15px; display: block;"></i>
+                        No export history yet
+                    </p>
+                `;
+                return;
+            }
+            
+            container.innerHTML = history.map(item => `
+                <div class="export-history-item" style="padding: 15px; border: 1px solid #e9ecef; border-radius: 8px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: between; align-items: center;">
+                        <div>
+                            <strong>${item.type.charAt(0).toUpperCase() + item.type.slice(1)} Data</strong>
+                            <div style="color: var(--gray); font-size: 0.9rem;">
+                                ${item.format.toUpperCase()} • ${new Date(item.date).toLocaleDateString()}
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary" onclick="reDownloadExport('${item.filename}')" style="padding: 5px 10px; font-size: 0.8rem;">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function reDownloadExport(filename) {
+            showNotification('Re-download functionality would connect to your cloud storage in a real app', 'info');
+        }
+
+        // ===== ORIGINAL APP FUNCTIONS =====
+        function handleLogin() {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (!email || !password) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+
+            if (userAccounts[email] && userAccounts[email].password === password) {
+                currentUser = { email: email, ...userAccounts[email] };
+                localStorage.setItem('helbCurrentUser', JSON.stringify(currentUser));
+                showApp();
+                showNotification(`Welcome back, ${currentUser.name}!`, 'success');
+            } else {
+                showNotification('Invalid email or password', 'error');
+            }
+        }
+
+        function handleSignup() {
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const university = document.getElementById('signupUniversity').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+            if (!name || !email || !university || !password || !confirmPassword) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match', 'error');
+                return;
+            }
+
+            if (password.length < 6) {
+                showNotification('Password must be at least 6 characters', 'error');
+                return;
+            }
+
+            if (userAccounts[email]) {
+                showNotification('An account with this email already exists', 'error');
+                return;
+            }
+
+            userAccounts[email] = {
+                password: password,
+                name: name,
+                university: university,
+                avatar: name.split(' ').map(n => n[0]).join('').toUpperCase()
+            };
+
+            currentUser = { email: email, ...userAccounts[email] };
+            localStorage.setItem('helbCurrentUser', JSON.stringify(currentUser));
+            showApp();
+            showNotification(`Account created successfully! Welcome, ${name}!`, 'success');
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('helbCurrentUser');
+            showLogin();
+            showNotification('You have been logged out successfully', 'info');
+        }
+
+        function checkExistingSession() {
+            const savedUser = localStorage.getItem('helbCurrentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                showApp();
+            } else {
+                showLogin();
+            }
+        }
+
+        function showLogin() {
+            document.getElementById('loginContainer').classList.remove('hidden');
+            document.getElementById('appContainer').style.display = 'none';
+            document.getElementById('loginForm').reset();
+            document.getElementById('signupForm').reset();
+        }
+
+        function showApp() {
+            document.getElementById('loginContainer').classList.add('hidden');
+            document.getElementById('appContainer').style.display = 'flex';
+            
+            if (currentUser) {
+                document.getElementById('userDisplayName').textContent = currentUser.name;
+                document.getElementById('userUniversity').textContent = currentUser.university;
+                document.getElementById('userAvatar').textContent = currentUser.avatar;
+            }
+            
+            initializeApp();
+        }
+
+        // ===== COMPREHENSIVE STATE MANAGEMENT & MISSING FUNCTIONS =====
         const state = {
             totalHelb: 68000,
             allocatedTotal: 0,
@@ -1476,7 +2737,6 @@
                 }
             },
             
-            // Savings Goals
             savingsGoals: [
                 {
                     id: 1,
@@ -1496,34 +2756,919 @@
                 }
             ],
             
-            // Payment History
             paymentHistory: [],
-            
-            // Expenses
             expenses: []
         };
 
-        // Initialize the application with all features
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeApp();
-        });
+        function calculateBudgetTotals() {
+            let allocated = 0;
+            let spent = 0;
+            
+            Object.values(state.categories).forEach(category => {
+                allocated += category.allocated;
+                spent += category.spent;
+            });
+            
+            state.allocatedTotal = allocated;
+            state.spentTotal = spent;
+            state.availableBalance = state.totalHelb - spent;
+            
+            updateBudgetDisplay();
+        }
 
-        function initializeApp() {
-            setupNavigation();
-            setupEventListeners();
-            calculateBudgetTotals();
-            updateAllDisplays();
-            initializeCharts();
-            renderSavingsGoals();
-            setupQuickPayButtons();
+        function updateBudgetDisplay() {
+            document.getElementById('total-helb').textContent = state.totalHelb.toLocaleString();
+            document.getElementById('allocated-total').textContent = state.allocatedTotal.toLocaleString();
+            document.getElementById('total-spent').textContent = state.spentTotal.toLocaleString();
+            document.getElementById('available-balance').textContent = state.availableBalance.toLocaleString();
+            document.getElementById('remaining-funds').textContent = (state.totalHelb - state.allocatedTotal).toLocaleString();
+            
+            const allocationPercent = ((state.allocatedTotal / state.totalHelb) * 100).toFixed(1);
+            document.getElementById('allocation-percent').textContent = allocationPercent + '%';
+            
+            // Update budget health
+            const healthElement = document.getElementById('budget-health');
+            const statusElement = document.getElementById('budget-status');
+            const healthPercentage = ((state.availableBalance / state.totalHelb) * 100);
+            
+            if (healthPercentage > 40) {
+                healthElement.textContent = 'Excellent';
+                healthElement.style.color = 'var(--success)';
+                statusElement.textContent = 'Great financial health!';
+            } else if (healthPercentage > 20) {
+                healthElement.textContent = 'Good';
+                healthElement.style.color = 'var(--warning)';
+                statusElement.textContent = 'Manage your spending carefully';
+            } else {
+                healthElement.textContent = 'Critical';
+                healthElement.style.color = 'var(--danger)';
+                statusElement.textContent = 'Review your expenses immediately';
+            }
+        }
+
+        function updateAllDisplays() {
+            updateBudgetDisplay();
             renderBudgetCategories();
             renderBills();
             renderExpenses();
             renderRecentTransactions();
             renderPaymentHistory();
+            renderSavingsGoals();
         }
 
-        // Enhanced navigation with all pages
+        function setupEventListeners() {
+            // Quick action buttons
+            document.getElementById('quick-budget').addEventListener('click', () => switchPage('budget'));
+            document.getElementById('quick-bills').addEventListener('click', () => switchPage('bills'));
+            document.getElementById('quick-pay').addEventListener('click', () => switchPage('payments'));
+            document.getElementById('quick-ai').addEventListener('click', () => switchPage('ai-advisor'));
+            
+            // Budget allocation
+            document.getElementById('allocate-btn').addEventListener('click', allocateFunds);
+            document.getElementById('category').addEventListener('change', updateAvailableAmount);
+            
+            // Payments and expenses
+            document.getElementById('process-payment').addEventListener('click', processPayment);
+            document.getElementById('add-expense-btn').addEventListener('click', addExpense);
+            document.getElementById('add-goal-btn').addEventListener('click', addSavingsGoal);
+            
+            // AI Advisor
+            document.getElementById('ask-ai-btn').addEventListener('click', askAIAdvisor);
+            
+            // Payment method selection
+            document.querySelectorAll('.payment-method').forEach(method => {
+                method.addEventListener('click', function() {
+                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Modal handlers
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', closeAllModals);
+            });
+            
+            document.getElementById('close-payment-modal').addEventListener('click', closeAllModals);
+            document.getElementById('cancel-payment').addEventListener('click', closeAllModals);
+            document.getElementById('proceed-anyway').addEventListener('click', proceedWithPayment);
+        }
+
+        function switchPage(pageId) {
+            document.querySelectorAll('.nav-links li').forEach(li => li.classList.remove('active'));
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            
+            const navItem = document.querySelector(`[data-page="${pageId}"]`);
+            if (navItem) {
+                navItem.classList.add('active');
+            }
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update page title
+            const titles = {
+                dashboard: 'Student Finance Dashboard',
+                'ai-advisor': 'AI Financial Advisor',
+                budget: 'Budget Allocation',
+                bills: 'My Bills & Payments',
+                payments: 'Make Payments',
+                expenses: 'Expense Tracking',
+                savings: 'Savings Goals',
+                analytics: 'Financial Analytics',
+                'financial-tips': 'Financial Tips',
+                'data-export': 'Data Export',
+                'profile-settings': 'Profile Settings'
+            };
+            document.getElementById('page-title').textContent = titles[pageId] || 'HELB Smart Budget';
+        }
+
+        // ===== BUDGET ALLOCATION FUNCTIONS =====
+        function updateAvailableAmount() {
+            const categorySelect = document.getElementById('category');
+            const selectedCategory = categorySelect.value;
+            const availableSpan = document.getElementById('available-amount');
+            
+            if (selectedCategory && state.categories[selectedCategory]) {
+                const remaining = state.totalHelb - state.allocatedTotal;
+                availableSpan.textContent = `Available to allocate: KSh ${remaining.toLocaleString()}`;
+            } else {
+                availableSpan.textContent = '';
+            }
+        }
+
+        function allocateFunds() {
+            const categorySelect = document.getElementById('category');
+            const amountInput = document.getElementById('amount');
+            
+            const categoryKey = categorySelect.value;
+            const amount = parseFloat(amountInput.value);
+            
+            if (!categoryKey) {
+                showNotification('Please select a category', 'error');
+                return;
+            }
+            
+            if (!amount || amount <= 0) {
+                showNotification('Please enter a valid amount', 'error');
+                return;
+            }
+            
+            const remainingFunds = state.totalHelb - state.allocatedTotal;
+            if (amount > remainingFunds) {
+                showNotification(`Only KSh ${remainingFunds.toLocaleString()} available to allocate`, 'error');
+                return;
+            }
+            
+            // Update category allocation
+            state.categories[categoryKey].allocated += amount;
+            
+            // Clear form
+            categorySelect.value = '';
+            amountInput.value = '';
+            document.getElementById('available-amount').textContent = '';
+            
+            // Update displays
+            calculateBudgetTotals();
+            renderBudgetCategories();
+            
+            showNotification(`Successfully allocated KSh ${amount.toLocaleString()} to ${state.categories[categoryKey].name}`, 'success');
+        }
+
+        // ===== PAYMENT PROCESSING FUNCTIONS =====
+        function processPayment() {
+            const category = document.getElementById('payment-category').value;
+            const description = document.getElementById('payment-description').value;
+            const amount = parseFloat(document.getElementById('payment-amount').value);
+            const method = document.querySelector('.payment-method.active')?.getAttribute('data-method');
+            
+            // Validation
+            if (!category || !description || !amount || !method) {
+                showNotification('Please fill all payment details', 'error');
+                return;
+            }
+            
+            if (amount <= 0) {
+                showNotification('Please enter a valid amount', 'error');
+                return;
+            }
+            
+            if (amount > state.availableBalance) {
+                showNotification('Insufficient funds for this payment', 'error');
+                return;
+            }
+            
+            // Check budget limits
+            const categoryData = state.categories[category];
+            const newSpent = categoryData.spent + amount;
+            const utilization = (newSpent / categoryData.allocated) * 100;
+            
+            if (utilization > categoryData.limit) {
+                showBudgetWarning(category, categoryData, amount);
+                return;
+            }
+            
+            completePayment(category, description, amount, method);
+        }
+
+        function showBudgetWarning(category, categoryData, amount) {
+            document.getElementById('warning-category').textContent = categoryData.name;
+            document.getElementById('warning-allocated').textContent = categoryData.allocated.toLocaleString();
+            document.getElementById('warning-spent').textContent = categoryData.spent.toLocaleString();
+            document.getElementById('warning-payment').textContent = amount.toLocaleString();
+            document.getElementById('warning-remaining').textContent = (categoryData.allocated - categoryData.spent - amount).toLocaleString();
+            
+            document.getElementById('budget-warning-modal').classList.add('active');
+            
+            // Store payment details for later
+            state.pendingPayment = { category, description: document.getElementById('payment-description').value, amount, method: document.querySelector('.payment-method.active')?.getAttribute('data-method') };
+        }
+
+        function proceedWithPayment() {
+            if (state.pendingPayment) {
+                completePayment(state.pendingPayment.category, state.pendingPayment.description, state.pendingPayment.amount, state.pendingPayment.method);
+                delete state.pendingPayment;
+            }
+            closeAllModals();
+        }
+
+        function completePayment(category, description, amount, method) {
+            // Update category spending
+            state.categories[category].spent += amount;
+            
+            // Add to bills
+            if (!state.categories[category].bills) {
+                state.categories[category].bills = [];
+            }
+            
+            const bill = {
+                name: description,
+                amount: amount,
+                date: new Date().toISOString().split('T')[0],
+                status: 'paid',
+                method: method
+            };
+            
+            state.categories[category].bills.push(bill);
+            
+            // Add to payment history
+            state.paymentHistory.unshift({
+                ...bill,
+                category: state.categories[category].name,
+                id: Date.now()
+            });
+            
+            // Update totals and displays
+            calculateBudgetTotals();
+            updateAllDisplays();
+            
+            // Show confirmation
+            showPaymentConfirmation(description, amount);
+            
+            // Clear form
+            document.getElementById('payment-category').value = '';
+            document.getElementById('payment-description').value = '';
+            document.getElementById('payment-amount').value = '';
+            
+            showNotification(`Payment of KSh ${amount.toLocaleString()} processed successfully`, 'success');
+            saveUserData();
+        }
+
+        function showPaymentConfirmation(description, amount) {
+            document.getElementById('confirm-description').textContent = description;
+            document.getElementById('confirm-amount').textContent = amount.toLocaleString();
+            document.getElementById('transaction-id').textContent = 'TXN-' + Date.now();
+            
+            document.getElementById('payment-confirmation').classList.add('active');
+        }
+
+        // ===== EXPENSE TRACKING FUNCTIONS =====
+        function addExpense() {
+            const category = document.getElementById('expense-category').value;
+            const description = document.getElementById('expense-description').value;
+            const amount = parseFloat(document.getElementById('expense-amount').value);
+            const date = document.getElementById('expense-date').value;
+            
+            if (!category || !description || !amount || !date) {
+                showNotification('Please fill all expense details', 'error');
+                return;
+            }
+            
+            if (amount <= 0) {
+                showNotification('Please enter a valid amount', 'error');
+                return;
+            }
+            
+            const expense = {
+                id: Date.now(),
+                category: category,
+                description: description,
+                amount: amount,
+                date: date,
+                status: 'completed'
+            };
+            
+            state.expenses.unshift(expense);
+            
+            // Clear form
+            document.getElementById('expense-category').value = '';
+            document.getElementById('expense-description').value = '';
+            document.getElementById('expense-amount').value = '';
+            document.getElementById('expense-date').value = '';
+            
+            renderExpenses();
+            showNotification('Expense added successfully', 'success');
+            saveUserData();
+        }
+
+        // ===== SAVINGS GOALS FUNCTIONS =====
+        function addSavingsGoal() {
+            const name = document.getElementById('goal-name').value;
+            const target = parseFloat(document.getElementById('goal-target').value);
+            const deadline = document.getElementById('goal-deadline').value;
+            
+            if (!name || !target || !deadline) {
+                showNotification('Please fill all goal details', 'error');
+                return;
+            }
+            
+            if (target <= 0) {
+                showNotification('Please enter a valid target amount', 'error');
+                return;
+            }
+            
+            const goal = {
+                id: Date.now(),
+                name: name,
+                target: target,
+                current: 0,
+                deadline: deadline,
+                completed: false
+            };
+            
+            state.savingsGoals.push(goal);
+            
+            // Clear form
+            document.getElementById('goal-name').value = '';
+            document.getElementById('goal-target').value = '';
+            document.getElementById('goal-deadline').value = '';
+            
+            renderSavingsGoals();
+            showNotification('Savings goal created successfully', 'success');
+            saveUserData();
+        }
+
+        // ===== AI ADVISOR FUNCTION =====
+        function askAIAdvisor() {
+            const question = document.getElementById('ai-question').value.trim();
+            
+            if (!question) {
+                showNotification('Please enter a question for the AI advisor', 'error');
+                return;
+            }
+            
+            // Simulate AI response based on keywords
+            let response = generateAIResponse(question);
+            
+            const recommendationsContainer = document.getElementById('ai-recommendations');
+            recommendationsContainer.innerHTML = `
+                <div class="alert-item">
+                    <i class="fas fa-robot"></i>
+                    <span><strong>AI Response:</strong> ${response}</span>
+                </div>
+            ` + recommendationsContainer.innerHTML;
+            
+            // Clear input
+            document.getElementById('ai-question').value = '';
+            
+            showNotification('AI advisor has responded to your question', 'success');
+        }
+
+        function generateAIResponse(question) {
+            const lowerQuestion = question.toLowerCase();
+            
+            if (lowerQuestion.includes('save') || lowerQuestion.includes('saving')) {
+                return "Based on your spending patterns, I recommend setting aside 10-15% of your HELB funds for savings. Consider automating transfers to your savings goal when you receive funds.";
+            } else if (lowerQuestion.includes('food') || lowerQuestion.includes('eating')) {
+                return "Your food expenses are 28% above the student average. Try meal prepping and cooking with roommates to save approximately KSh 2,400 per month.";
+            } else if (lowerQuestion.includes('budget') || lowerQuestion.includes('allocate')) {
+                return "Your current budget allocation is good, but consider increasing your emergency fund allocation by 5%. Your transport budget has KSh 6,000 unused - consider reallocating some to food.";
+            } else if (lowerQuestion.includes('emergency') || lowerQuestion.includes('unexpected')) {
+                return "I recommend maintaining an emergency fund of KSh 5,000-10,000. You're at 64% of your KSh 5,000 goal - great progress!";
+            } else {
+                return "I've analyzed your financial data. Your overall financial health is good at 78%. Focus on reducing food expenses and consistently contributing to your savings goals. Would you like specific advice on any particular area?";
+            }
+        }
+
+        // ===== RENDERING FUNCTIONS =====
+        function renderBudgetCategories() {
+            const container = document.getElementById('budget-categories-list');
+            if (!container) return;
+            
+            container.innerHTML = Object.values(state.categories).map(category => `
+                <div class="category-card">
+                    <div class="category-header">
+                        <div class="category-name">${category.name}</div>
+                        <div class="category-amount">KSh ${category.allocated.toLocaleString()}</div>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill ${getProgressClass(category.spent / category.allocated)}" 
+                             style="width: ${Math.min((category.spent / category.allocated) * 100, 100)}%">
+                        </div>
+                    </div>
+                    <div class="progress-label">
+                        <span>Spent: KSh ${category.spent.toLocaleString()}</span>
+                        <span>Remaining: KSh ${(category.allocated - category.spent).toLocaleString()}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getProgressClass(ratio) {
+            if (ratio < 0.7) return 'progress-safe';
+            if (ratio < 0.9) return 'progress-warning';
+            return 'progress-danger';
+        }
+
+        function renderBills() {
+            const container = document.getElementById('bills-container');
+            if (!container) return;
+            
+            const allBills = [];
+            Object.values(state.categories).forEach(category => {
+                if (category.bills) {
+                    category.bills.forEach(bill => {
+                        allBills.push({...bill, category: category.name});
+                    });
+                }
+            });
+            
+            container.innerHTML = allBills.map(bill => `
+                <div class="bill-item" style="padding: 15px; border: 1px solid #e9ecef; border-radius: 8px; margin-bottom: 10px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>${bill.name}</strong>
+                            <div style="color: var(--gray); font-size: 0.9rem;">${bill.category} • ${new Date(bill.date).toLocaleDateString()}</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: bold;">KSh ${bill.amount.toLocaleString()}</div>
+                            <span class="payment-status status-${bill.status}">${bill.status}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderExpenses() {
+            const container = document.getElementById('expenses-list');
+            if (!container) return;
+            
+            const recentExpenses = state.expenses.slice(0, 10);
+            
+            container.innerHTML = recentExpenses.map(expense => `
+                <div class="expense-item">
+                    <div>${expense.description}</div>
+                    <div>${state.categories[expense.category]?.name || expense.category}</div>
+                    <div>${new Date(expense.date).toLocaleDateString()}</div>
+                    <div>KSh ${expense.amount.toLocaleString()}</div>
+                    <div><span class="payment-status status-${expense.status}">${expense.status}</span></div>
+                </div>
+            `).join('');
+        }
+
+        function renderRecentTransactions() {
+            const container = document.getElementById('recent-transactions');
+            if (!container) return;
+            
+            const allTransactions = [];
+            
+            // Get bills from categories
+            Object.values(state.categories).forEach(category => {
+                if (category.bills) {
+                    category.bills.forEach(bill => {
+                        allTransactions.push({
+                            ...bill,
+                            category: category.name,
+                            type: 'payment'
+                        });
+                    });
+                }
+            });
+            
+            // Get expenses
+            state.expenses.forEach(expense => {
+                allTransactions.push({
+                    name: expense.description,
+                    amount: expense.amount,
+                    date: expense.date,
+                    category: state.categories[expense.category]?.name || expense.category,
+                    status: expense.status,
+                    type: 'expense'
+                });
+            });
+            
+            // Sort by date and take latest 5
+            const recent = allTransactions
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 5);
+            
+            container.innerHTML = recent.map(transaction => `
+                <div class="expense-item">
+                    <div>${transaction.name}</div>
+                    <div>${transaction.category}</div>
+                    <div>${new Date(transaction.date).toLocaleDateString()}</div>
+                    <div>KSh ${transaction.amount.toLocaleString()}</div>
+                    <div><span class="payment-status status-${transaction.status}">${transaction.status}</span></div>
+                </div>
+            `).join('');
+        }
+
+        function renderPaymentHistory() {
+            const container = document.getElementById('payment-history-list');
+            if (!container) return;
+            
+            const recentPayments = state.paymentHistory.slice(0, 10);
+            
+            container.innerHTML = recentPayments.map(payment => `
+                <div class="expense-item">
+                    <div>${payment.name}</div>
+                    <div>${payment.category}</div>
+                    <div>${new Date(payment.date).toLocaleDateString()}</div>
+                    <div>KSh ${payment.amount.toLocaleString()}</div>
+                    <div><span class="payment-status status-${payment.status}">${payment.status}</span></div>
+                </div>
+            `).join('');
+        }
+
+        function renderSavingsGoals() {
+            const container = document.getElementById('savings-goals-list');
+            if (!container) return;
+            
+            container.innerHTML = state.savingsGoals.map(goal => `
+                <div class="goal-item">
+                    <div style="flex: 1;">
+                        <h4 style="margin-bottom: 5px;">${goal.name}</h4>
+                        <p style="color: var(--gray); margin: 0;">Target: KSh ${goal.target.toLocaleString()} • Deadline: ${new Date(goal.deadline).toLocaleDateString()}</p>
+                    </div>
+                    <div class="goal-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill progress-safe" style="width: ${(goal.current / goal.target) * 100}%"></div>
+                        </div>
+                        <div class="progress-label">
+                            <span>KSh ${goal.current.toLocaleString()} saved</span>
+                            <span>${((goal.current / goal.target) * 100).toFixed(1)}%</span>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: bold; color: var(--success);">KSh ${goal.current.toLocaleString()}</div>
+                        <div style="color: var(--gray); font-size: 0.9rem;">of KSh ${goal.target.toLocaleString()}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ===== CHART INITIALIZATION =====
+        function initializeCharts() {
+            // Pulse Chart
+            const pulseCtx = document.getElementById('pulseChart');
+            if (pulseCtx) {
+                new Chart(pulseCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Used', 'Available'],
+                        datasets: [{
+                            data: [state.spentTotal, state.availableBalance],
+                            backgroundColor: ['#28a745', '#e9ecef'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        cutout: '70%',
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: { 
+                                callbacks: {
+                                    label: function(context) {
+                                        return `KSh ${context.raw.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Category Spending Chart
+            const categoryCtx = document.getElementById('categoryChart');
+            if (categoryCtx) {
+                new Chart(categoryCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: Object.values(state.categories).map(c => c.name),
+                        datasets: [{
+                            data: Object.values(state.categories).map(c => c.spent),
+                            backgroundColor: [
+                                '#1a5f2a', '#28a745', '#ffc107', '#dc3545', 
+                                '#17a2b8', '#6c757d', '#343a40'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'bottom' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: KSh ${context.raw.toLocaleString()}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Monthly Trend Chart
+            const trendCtx = document.getElementById('trendChart');
+            if (trendCtx) {
+                new Chart(trendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Monthly Spending',
+                            data: [22000, 25850, 21000, 19500, 24000, 18500],
+                            borderColor: '#1a5f2a',
+                            backgroundColor: 'rgba(26, 95, 42, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'KSh ' + value.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Budget vs Actual Chart
+            const budgetCtx = document.getElementById('budgetChart');
+            if (budgetCtx) {
+                const categories = Object.values(state.categories);
+                new Chart(budgetCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: categories.map(c => c.name),
+                        datasets: [
+                            {
+                                label: 'Allocated',
+                                data: categories.map(c => c.allocated),
+                                backgroundColor: '#1a5f2a'
+                            },
+                            {
+                                label: 'Spent',
+                                data: categories.map(c => c.spent),
+                                backgroundColor: '#28a745'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return 'KSh ' + value.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // ===== QUICK PAY BUTTONS =====
+        function setupQuickPayButtons() {
+            document.querySelectorAll('.quick-pay-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const billType = this.getAttribute('data-bill');
+                    const amounts = {
+                        electricity: 1500,
+                        tuition: 26000,
+                        rent: 9000,
+                        internet: 1200
+                    };
+                    
+                    const descriptions = {
+                        electricity: 'Electricity Bill Payment',
+                        tuition: 'Tuition Fee Payment',
+                        rent: 'Monthly Rent Payment',
+                        internet: 'Internet Subscription'
+                    };
+                    
+                    document.getElementById('payment-amount').value = amounts[billType];
+                    document.getElementById('payment-description').value = descriptions[billType];
+                    document.getElementById('payment-category').value = billType === 'tuition' ? 'tuition' : 
+                                                                       billType === 'rent' ? 'accommodation' : 'utilities';
+                    
+                    switchPage('payments');
+                    showNotification(`Quick pay for ${billType} prepared - review and confirm payment`, 'info');
+                });
+            });
+        }
+
+        // ===== MODAL MANAGEMENT =====
+        function closeAllModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+
+        // ===== DATA PERSISTENCE =====
+        function saveUserData() {
+            if (currentUser) {
+                const userData = {
+                    state: state,
+                    lastUpdated: new Date().toISOString()
+                };
+                localStorage.setItem(`helbData_${currentUser.email}`, JSON.stringify(userData));
+            }
+        }
+
+        function loadUserData() {
+            if (currentUser) {
+                const saved = localStorage.getItem(`helbData_${currentUser.email}`);
+                if (saved) {
+                    try {
+                        const userData = JSON.parse(saved);
+                        if (userData.state) {
+                            Object.assign(state, userData.state);
+                        }
+                    } catch (e) {
+                        console.log('No saved data found or data corrupted');
+                    }
+                }
+            }
+        }
+
+        // ===== ENHANCED FORM VALIDATION =====
+        function setupFormValidation() {
+            // Real-time validation for amount fields
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.addEventListener('input', function() {
+                    validateAmountField(this);
+                });
+            });
+            
+            // Email validation
+            document.querySelectorAll('input[type="email"]').forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateEmailField(this);
+                });
+            });
+            
+            // Password validation
+            document.querySelectorAll('input[type="password"]').forEach(input => {
+                input.addEventListener('input', function() {
+                    validatePasswordField(this);
+                });
+            });
+        }
+
+        function validateAmountField(field) {
+            const value = parseFloat(field.value);
+            const min = parseFloat(field.min) || 0;
+            const max = parseFloat(field.max) || Infinity;
+            
+            clearValidation(field);
+            
+            if (field.value === '') {
+                return true;
+            }
+            
+            if (isNaN(value) || value < min) {
+                showFieldError(field, `Amount must be at least ${min}`);
+                return false;
+            }
+            
+            if (value > max) {
+                showFieldError(field, `Amount cannot exceed ${max}`);
+                return false;
+            }
+            
+            showFieldSuccess(field);
+            return true;
+        }
+
+        function validateEmailField(field) {
+            const email = field.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            clearValidation(field);
+            
+            if (field.value === '') {
+                return true;
+            }
+            
+            if (!emailRegex.test(email)) {
+                showFieldError(field, 'Please enter a valid email address');
+                return false;
+            }
+            
+            // Check for university email in signup
+            if (field.id === 'signupEmail' && !email.includes('.ac.ke')) {
+                showFieldError(field, 'Please use your university email address (.ac.ke)');
+                return false;
+            }
+            
+            showFieldSuccess(field);
+            return true;
+        }
+
+        function validatePasswordField(field) {
+            const password = field.value;
+            
+            clearValidation(field);
+            
+            if (field.value === '') {
+                return true;
+            }
+            
+            if (password.length < 6) {
+                showFieldError(field, 'Password must be at least 6 characters');
+                return false;
+            }
+            
+            showFieldSuccess(field);
+            return true;
+        }
+
+        function showFieldError(field, message) {
+            field.classList.add('invalid');
+            field.classList.remove('valid');
+            
+            let messageElement = field.parentNode.querySelector('.validation-message');
+            if (!messageElement) {
+                messageElement = document.createElement('div');
+                messageElement.className = 'validation-message error';
+                field.parentNode.appendChild(messageElement);
+            }
+            
+            messageElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+        }
+
+        function showFieldSuccess(field) {
+            field.classList.add('valid');
+            field.classList.remove('invalid');
+            
+            const messageElement = field.parentNode.querySelector('.validation-message');
+            if (messageElement) {
+                messageElement.remove();
+            }
+        }
+
+        function clearValidation(field) {
+            field.classList.remove('invalid', 'valid');
+            
+            const messageElement = field.parentNode.querySelector('.validation-message');
+            if (messageElement) {
+                messageElement.remove();
+            }
+        }
+
+        // ===== ENHANCED APP INITIALIZATION =====
+        function initializeApp() {
+            if (!currentUser) return;
+            
+            loadUserData();
+            setupNavigation();
+            setupEventListeners();
+            setupFormValidation();
+            calculateBudgetTotals();
+            updateAllDisplays();
+            initializeCharts();
+            setupQuickPayButtons();
+            
+            // Set current date for expense form
+            document.getElementById('expense-date').value = new Date().toISOString().split('T')[0];
+            
+            showNotification(`Welcome to HELB Smart Budget, ${currentUser.name}!`, 'success');
+        }
+
+        // ===== ENHANCED NAVIGATION =====
         function setupNavigation() {
             const pages = document.querySelectorAll('.page');
             const navLinks = document.querySelectorAll('.nav-links li');
@@ -1548,7 +3693,9 @@
                         expenses: 'Expense Tracking',
                         savings: 'Savings Goals',
                         analytics: 'Financial Analytics',
-                        'financial-tips': 'Financial Tips'
+                        'financial-tips': 'Financial Tips',
+                        'data-export': 'Data Export',
+                        'profile-settings': 'Profile Settings'
                     };
                     pageTitle.textContent = titles[pageId];
 
@@ -1558,795 +3705,27 @@
                     if (pageId === 'analytics') {
                         setTimeout(initializeCharts, 100);
                     }
+                    if (pageId === 'profile-settings') {
+                        loadProfileData();
+                    }
+                    if (pageId === 'data-export') {
+                        renderExportHistory();
+                    }
                 });
             });
         }
 
-        // Enhanced event listeners with all features
-        function setupEventListeners() {
-            // Budget Allocation
-            document.getElementById('allocate-btn').addEventListener('click', addAllocation);
-            document.getElementById('amount').addEventListener('input', validateAllocationAmount);
-            document.getElementById('category').addEventListener('change', updateAvailableForAllocation);
-
-            // Savings Goals
-            document.getElementById('add-goal-btn').addEventListener('click', addSavingsGoal);
-
-            // Quick Actions
-            document.getElementById('quick-budget').addEventListener('click', () => navigateToPage('budget'));
-            document.getElementById('quick-bills').addEventListener('click', () => navigateToPage('bills'));
-            document.getElementById('quick-pay').addEventListener('click', () => navigateToPage('payments'));
-            document.getElementById('quick-ai').addEventListener('click', () => navigateToPage('ai-advisor'));
-
-            // Expense Tracking
-            document.getElementById('add-expense-btn').addEventListener('click', addExpense);
-
-            // Payment System
-            document.querySelectorAll('.payment-method').forEach(method => {
-                method.addEventListener('click', function() {
-                    document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-
-            document.getElementById('process-payment').addEventListener('click', processPayment);
-            document.getElementById('close-payment-modal').addEventListener('click', () => {
-                document.getElementById('payment-confirmation').classList.remove('active');
-            });
-
-            // Budget Warning Modal
-            document.getElementById('proceed-anyway').addEventListener('click', proceedWithPayment);
-            document.getElementById('cancel-payment').addEventListener('click', () => {
-                document.getElementById('budget-warning-modal').classList.remove('active');
-            });
-
-            // Real-time amount validation
-            document.getElementById('payment-amount').addEventListener('input', validatePaymentAmount);
-            document.getElementById('payment-category').addEventListener('change', validatePaymentAmount);
-
-            // AI Advisor
-            document.getElementById('ask-ai-btn').addEventListener('click', askAIAdvisor);
-        }
-
-        // Setup Quick Pay Buttons
-        function setupQuickPayButtons() {
-            document.querySelectorAll('.quick-pay-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const billType = this.getAttribute('data-bill');
-                    const amounts = {
-                        electricity: 1500,
-                        tuition: 26000,
-                        rent: 9000,
-                        internet: 1200
-                    };
-                    const descriptions = {
-                        electricity: 'Electricity Bill Payment',
-                        tuition: 'University Tuition Fees',
-                        rent: 'Hostel Rent Payment',
-                        internet: 'Internet Subscription'
-                    };
-                    
-                    // Navigate to payments page and auto-fill
-                    navigateToPage('payments');
-                    setTimeout(() => {
-                        document.getElementById('payment-amount').value = amounts[billType];
-                        document.getElementById('payment-description').value = descriptions[billType];
-                        
-                        // Auto-select category based on bill type
-                        const categoryMap = {
-                            electricity: 'utilities',
-                            tuition: 'tuition',
-                            rent: 'accommodation',
-                            internet: 'utilities'
-                        };
-                        document.getElementById('payment-category').value = categoryMap[billType];
-                    }, 100);
-                });
-            });
-        }
-
-        // Navigation helper
-        function navigateToPage(pageId) {
-            document.querySelectorAll('.nav-links li').forEach(link => link.classList.remove('active'));
-            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
-            
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            
-            const titles = {
-                dashboard: 'Student Finance Dashboard',
-                'ai-advisor': 'AI Financial Advisor',
-                budget: 'Budget Allocation',
-                bills: 'My Bills & Payments',
-                payments: 'Make Payments',
-                expenses: 'Expense Tracking',
-                savings: 'Savings Goals',
-                analytics: 'Financial Analytics',
-                'financial-tips': 'Financial Tips'
-            };
-            document.getElementById('page-title').textContent = titles[pageId];
-        }
-
-        // Calculate budget totals
-        function calculateBudgetTotals() {
-            state.allocatedTotal = Object.values(state.categories).reduce((sum, cat) => sum + cat.allocated, 0);
-            state.spentTotal = Object.values(state.categories).reduce((sum, cat) => sum + cat.spent, 0);
-            state.availableBalance = state.totalHelb - state.spentTotal;
-        }
-
-        // Update all displays
-        function updateAllDisplays() {
-            updateDashboard();
-            updateBudgetPage();
-            updatePaymentsPage();
-        }
-
-        // Update Dashboard
-        function updateDashboard() {
-            document.getElementById('total-helb').textContent = state.totalHelb.toLocaleString();
-            document.getElementById('available-balance').textContent = state.availableBalance.toLocaleString();
-            document.getElementById('total-spent').textContent = state.spentTotal.toLocaleString();
-            
-            // Update budget health
-            const budgetHealth = document.getElementById('budget-health');
-            const budgetStatus = document.getElementById('budget-status');
-            
-            const overspentCategories = Object.values(state.categories).filter(cat => cat.spent > cat.allocated);
-            if (overspentCategories.length > 0) {
-                budgetHealth.textContent = 'Needs Attention';
-                budgetHealth.style.color = 'var(--danger)';
-                budgetStatus.textContent = `${overspentCategories.length} categories over budget`;
-            } else {
-                budgetHealth.textContent = 'Good';
-                budgetHealth.style.color = 'var(--success)';
-                budgetStatus.textContent = 'All categories within limits';
-            }
-        }
-
-        // Update Budget Page
-        function updateBudgetPage() {
-            document.getElementById('total-helb-budget').textContent = state.totalHelb.toLocaleString();
-            document.getElementById('allocated-total').textContent = state.allocatedTotal.toLocaleString();
-            document.getElementById('remaining-funds').textContent = (state.totalHelb - state.allocatedTotal).toLocaleString();
-            document.getElementById('allocation-percent').textContent = Math.round((state.allocatedTotal / state.totalHelb) * 100) + '%';
-        }
-
-        // Update Payments Page
-        function updatePaymentsPage() {
-            // Update payment category dropdown
-            const paymentCategory = document.getElementById('payment-category');
-            paymentCategory.innerHTML = '<option value="">Select category...</option>';
-            Object.entries(state.categories).forEach(([key, category]) => {
-                const option = document.createElement('option');
-                option.value = key;
-                option.textContent = category.name;
-                paymentCategory.appendChild(option);
-            });
-        }
-
-        // Budget Allocation Functions
-        function updateAvailableForAllocation() {
-            const categorySelect = document.getElementById('category');
-            const amountInput = document.getElementById('amount');
-            const availableAmount = document.getElementById('available-amount');
-            
-            if (categorySelect.value) {
-                const remaining = state.totalHelb - state.allocatedTotal;
-                availableAmount.textContent = `Available for allocation: KSh ${remaining.toLocaleString()}`;
-                amountInput.max = remaining;
-            } else {
-                availableAmount.textContent = '';
-            }
-        }
-
-        function validateAllocationAmount() {
-            const amount = parseInt(document.getElementById('amount').value) || 0;
-            const category = document.getElementById('category').value;
-            const allocateBtn = document.getElementById('allocate-btn');
-            
-            if (amount > 0 && category && amount <= (state.totalHelb - state.allocatedTotal)) {
-                allocateBtn.disabled = false;
-            } else {
-                allocateBtn.disabled = true;
-            }
-        }
-
-        function addAllocation() {
-            const categoryKey = document.getElementById('category').value;
-            const amount = parseInt(document.getElementById('amount').value);
-            
-            if (!categoryKey || !amount) {
-                showNotification('Please select a category and enter an amount', 'error');
-                return;
-            }
-            
-            if (amount > (state.totalHelb - state.allocatedTotal)) {
-                showNotification('Amount exceeds available HELB funds', 'error');
-                return;
-            }
-            
-            state.categories[categoryKey].allocated += amount;
+        function updateBudgetAllocationDisplay() {
+            // This function is called when budget page is activated
             calculateBudgetTotals();
-            updateAllDisplays();
             renderBudgetCategories();
-            
-            // Reset form
-            document.getElementById('category').value = '';
-            document.getElementById('amount').value = '';
-            document.getElementById('available-amount').textContent = '';
-            document.getElementById('allocate-btn').disabled = true;
-            
-            showNotification(`Successfully allocated KSh ${amount.toLocaleString()} to ${state.categories[categoryKey].name}`, 'success');
         }
 
-        // Render Budget Categories
-        function renderBudgetCategories() {
-            const container = document.getElementById('budget-categories-list');
-            container.innerHTML = '';
-            
-            Object.entries(state.categories).forEach(([key, category]) => {
-                const progress = (category.spent / category.allocated) * 100;
-                const progressClass = progress > 100 ? 'progress-danger' : 
-                                   progress > 80 ? 'progress-warning' : 'progress-safe';
-                
-                const categoryHTML = `
-                    <div class="category-card">
-                        <div class="category-header">
-                            <div class="category-name">${category.name}</div>
-                            <div class="category-amount">KSh ${category.allocated.toLocaleString()}</div>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress-fill ${progressClass}" style="width: ${Math.min(progress, 100)}%"></div>
-                        </div>
-                        <div class="progress-label">
-                            <span>Spent: KSh ${category.spent.toLocaleString()}</span>
-                            <span>${progress.toFixed(1)}%</span>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += categoryHTML;
-            });
-        }
-
-        // Render Bills
-        function renderBills() {
-            const container = document.getElementById('bills-container');
-            container.innerHTML = '';
-            
-            Object.entries(state.categories).forEach(([key, category]) => {
-                if (category.bills && category.bills.length > 0) {
-                    category.bills.forEach(bill => {
-                        const billHTML = `
-                            <div class="category-card">
-                                <div class="category-header">
-                                    <div class="category-name">${bill.name}</div>
-                                    <div class="category-amount">KSh ${bill.amount.toLocaleString()}</div>
-                                </div>
-                                <div class="progress-label">
-                                    <span>Due: ${new Date(bill.date).toLocaleDateString()}</span>
-                                    <span class="payment-status status-${bill.status}">${bill.status.charAt(0).toUpperCase() + bill.status.slice(1)}</span>
-                                </div>
-                            </div>
-                        `;
-                        container.innerHTML += billHTML;
-                    });
-                }
-            });
-        }
-
-        // Render Expenses
-        function renderExpenses() {
-            const container = document.getElementById('expenses-list');
-            container.innerHTML = '';
-            
-            const allExpenses = [];
-            Object.entries(state.categories).forEach(([key, category]) => {
-                if (category.bills) {
-                    category.bills.forEach(bill => {
-                        allExpenses.push({
-                            ...bill,
-                            category: category.name
-                        });
-                    });
-                }
-            });
-            
-            // Add some sample expenses
-            const sampleExpenses = [
-                { name: "Groceries", category: "Food & Meals", date: "2023-01-25", amount: 1500, status: "paid" },
-                { name: "Bus Fare", category: "Transport", date: "2023-01-24", amount: 200, status: "paid" },
-                { name: "Stationery", category: "Books & Supplies", date: "2023-01-23", amount: 450, status: "paid" }
-            ];
-            
-            sampleExpenses.forEach(expense => {
-                allExpenses.push(expense);
-            });
-            
-            const sortedExpenses = allExpenses.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            sortedExpenses.forEach(expense => {
-                const expenseHTML = `
-                    <div class="expense-item">
-                        <div>${expense.name}</div>
-                        <div>${expense.category}</div>
-                        <div>${new Date(expense.date).toLocaleDateString()}</div>
-                        <div>KSh ${expense.amount.toLocaleString()}</div>
-                        <div><span class="payment-status status-${expense.status}">${expense.status.charAt(0).toUpperCase() + expense.status.slice(1)}</span></div>
-                    </div>
-                `;
-                container.innerHTML += expenseHTML;
-            });
-        }
-
-        // Render Recent Transactions
-        function renderRecentTransactions() {
-            const container = document.getElementById('recent-transactions');
-            container.innerHTML = '';
-            
-            const allTransactions = [];
-            Object.entries(state.categories).forEach(([key, category]) => {
-                if (category.bills) {
-                    category.bills.forEach(bill => {
-                        allTransactions.push({
-                            ...bill,
-                            category: category.name
-                        });
-                    });
-                }
-            });
-            
-            const recentTransactions = allTransactions
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, 5);
-            
-            recentTransactions.forEach(transaction => {
-                const transactionHTML = `
-                    <div class="expense-item">
-                        <div>${transaction.name}</div>
-                        <div>${transaction.category}</div>
-                        <div>${new Date(transaction.date).toLocaleDateString()}</div>
-                        <div>KSh ${transaction.amount.toLocaleString()}</div>
-                        <div><span class="payment-status status-paid">Paid</span></div>
-                    </div>
-                `;
-                container.innerHTML += transactionHTML;
-            });
-        }
-
-        // Render Payment History
-        function renderPaymentHistory() {
-            const container = document.getElementById('payment-history-list');
-            container.innerHTML = '';
-            
-            const allPayments = [];
-            Object.entries(state.categories).forEach(([key, category]) => {
-                if (category.bills) {
-                    category.bills.forEach(bill => {
-                        allPayments.push({
-                            ...bill,
-                            category: category.name
-                        });
-                    });
-                }
-            });
-            
-            const sortedPayments = allPayments.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            sortedPayments.forEach(payment => {
-                const paymentHTML = `
-                    <div class="expense-item">
-                        <div>${payment.name}</div>
-                        <div>${payment.category}</div>
-                        <div>${new Date(payment.date).toLocaleDateString()}</div>
-                        <div>KSh ${payment.amount.toLocaleString()}</div>
-                        <div><span class="payment-status status-${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></div>
-                    </div>
-                `;
-                container.innerHTML += paymentHTML;
-            });
-        }
-
-        // Savings Goals Functions
-        function renderSavingsGoals() {
-            const container = document.getElementById('savings-goals-list');
-            container.innerHTML = '';
-            
-            state.savingsGoals.forEach(goal => {
-                const progress = (goal.current / goal.target) * 100;
-                const goalHTML = `
-                    <div class="goal-item">
-                        <div>
-                            <h4>${goal.name}</h4>
-                            <div>Target: KSh ${goal.target.toLocaleString()} • Deadline: ${new Date(goal.deadline).toLocaleDateString()}</div>
-                        </div>
-                        <div class="goal-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill progress-safe" style="width: ${progress}%"></div>
-                            </div>
-                            <div class="progress-label">
-                                <span>KSh ${goal.current.toLocaleString()} saved</span>
-                                <span>${progress.toFixed(1)}% complete</span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="category-amount">KSh ${(goal.target - goal.current).toLocaleString()}</div>
-                            <small style="color: var(--gray);">remaining</small>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += goalHTML;
-            });
-        }
-
-        function addSavingsGoal() {
-            const name = document.getElementById('goal-name').value;
-            const target = parseInt(document.getElementById('goal-target').value);
-            const deadline = document.getElementById('goal-deadline').value;
-            
-            if (!name || !target || !deadline) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
-            
-            if (target <= 0) {
-                showNotification('Target amount must be positive', 'error');
-                return;
-            }
-            
-            const newGoal = {
-                id: state.savingsGoals.length + 1,
-                name: name,
-                target: target,
-                current: 0,
-                deadline: deadline,
-                completed: false
-            };
-            
-            state.savingsGoals.push(newGoal);
-            renderSavingsGoals();
-            
-            // Reset form
-            document.getElementById('goal-name').value = '';
-            document.getElementById('goal-target').value = '';
-            document.getElementById('goal-deadline').value = '';
-            
-            showNotification('Savings goal created successfully!', 'success');
-        }
-
-        // Expense Functions
-        function addExpense() {
-            const categoryKey = document.getElementById('expense-category').value;
-            const description = document.getElementById('expense-description').value;
-            const amount = parseInt(document.getElementById('expense-amount').value);
-            const date = document.getElementById('expense-date').value || new Date().toISOString().split('T')[0];
-            
-            if (!categoryKey || !description || !amount) {
-                showNotification('Please fill in all fields', 'error');
-                return;
-            }
-            
-            if (amount <= 0) {
-                showNotification('Amount must be positive', 'error');
-                return;
-            }
-            
-            // Check if expense exceeds budget
-            const category = state.categories[categoryKey];
-            const newTotalSpent = category.spent + amount;
-            
-            if (newTotalSpent > category.allocated) {
-                if (!confirm(`This expense will exceed your ${category.name} budget. Do you want to continue?`)) {
-                    return;
-                }
-            }
-            
-            // Add expense
-            if (!category.bills) category.bills = [];
-            category.bills.push({
-                name: description,
-                amount: amount,
-                date: date,
-                status: 'paid'
-            });
-            
-            category.spent += amount;
-            state.spentTotal += amount;
-            state.availableBalance -= amount;
-            
-            calculateBudgetTotals();
-            updateAllDisplays();
-            renderExpenses();
-            renderRecentTransactions();
-            renderPaymentHistory();
-            
-            // Reset form
-            document.getElementById('expense-category').value = '';
-            document.getElementById('expense-description').value = '';
-            document.getElementById('expense-amount').value = '';
-            document.getElementById('expense-date').value = '';
-            
-            showNotification(`Expense of KSh ${amount.toLocaleString()} added successfully`, 'success');
-        }
-
-        // Payment Functions
-        function validatePaymentAmount() {
-            const amount = parseInt(document.getElementById('payment-amount').value) || 0;
-            const category = document.getElementById('payment-category').value;
-            const processBtn = document.getElementById('process-payment');
-            
-            if (amount > 0 && category && amount <= state.availableBalance) {
-                processBtn.disabled = false;
-            } else {
-                processBtn.disabled = true;
-            }
-        }
-
-        function processPayment() {
-            const categoryKey = document.getElementById('payment-category').value;
-            const description = document.getElementById('payment-description').value;
-            const amount = parseInt(document.getElementById('payment-amount').value);
-            const method = document.querySelector('.payment-method.active')?.getAttribute('data-method');
-            
-            if (!categoryKey || !description || !amount || !method) {
-                showNotification('Please fill in all payment details', 'error');
-                return;
-            }
-            
-            if (amount > state.availableBalance) {
-                showNotification('Insufficient funds for this payment', 'error');
-                return;
-            }
-            
-            const category = state.categories[categoryKey];
-            const newTotalSpent = category.spent + amount;
-            
-            // Check if payment exceeds budget
-            if (newTotalSpent > category.allocated) {
-                showBudgetWarning(category, amount);
-                return;
-            }
-            
-            completePayment(categoryKey, description, amount, method);
-        }
-
-        function showBudgetWarning(category, amount) {
-            document.getElementById('warning-category').textContent = category.name;
-            document.getElementById('warning-allocated').textContent = category.allocated.toLocaleString();
-            document.getElementById('warning-spent').textContent = category.spent.toLocaleString();
-            document.getElementById('warning-payment').textContent = amount.toLocaleString();
-            document.getElementById('warning-remaining').textContent = (category.allocated - (category.spent + amount)).toLocaleString();
-            
-            document.getElementById('budget-warning-modal').classList.add('active');
-        }
-
-        function proceedWithPayment() {
-            const categoryKey = document.getElementById('payment-category').value;
-            const description = document.getElementById('payment-description').value;
-            const amount = parseInt(document.getElementById('payment-amount').value);
-            const method = document.querySelector('.payment-method.active')?.getAttribute('data-method');
-            
-            completePayment(categoryKey, description, amount, method);
-            document.getElementById('budget-warning-modal').classList.remove('active');
-        }
-
-        function completePayment(categoryKey, description, amount, method) {
-            const category = state.categories[categoryKey];
-            
-            // Add to bills
-            if (!category.bills) category.bills = [];
-            category.bills.push({
-                name: description,
-                amount: amount,
-                date: new Date().toISOString().split('T')[0],
-                status: 'paid'
-            });
-            
-            // Update totals
-            category.spent += amount;
-            state.spentTotal += amount;
-            state.availableBalance -= amount;
-            
-            calculateBudgetTotals();
-            updateAllDisplays();
-            renderBills();
-            renderRecentTransactions();
-            renderPaymentHistory();
-            
-            // Show confirmation
-            document.getElementById('confirm-amount').textContent = amount.toLocaleString();
-            document.getElementById('confirm-description').textContent = description;
-            document.getElementById('transaction-id').textContent = 'TXN-' + Date.now();
-            document.getElementById('payment-confirmation').classList.add('active');
-            
-            // Reset form
-            document.getElementById('payment-category').value = '';
-            document.getElementById('payment-description').value = '';
-            document.getElementById('payment-amount').value = '';
-            document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('active'));
-            document.querySelector('.payment-method').classList.add('active');
-            document.getElementById('process-payment').disabled = true;
-            
-            showNotification(`Payment of KSh ${amount.toLocaleString()} processed successfully`, 'success');
-        }
-
-        // AI Advisor Function
-        function askAIAdvisor() {
-            const question = document.getElementById('ai-question').value;
-            
-            if (!question.trim()) {
-                showNotification('Please enter a question for the AI advisor', 'error');
-                return;
-            }
-            
-            // Simulate AI response
-            const responses = [
-                "Based on your spending patterns, I recommend increasing your food budget allocation by 10% to avoid overspending.",
-                "Your savings rate is excellent! Consider investing 20% of your emergency fund in a low-risk savings account.",
-                "I notice you're underutilizing your transport budget. You could reallocate KSh 1,500 to other categories.",
-                "Your financial health score is 78%. To improve it, try to reduce discretionary spending by 15% this month.",
-                "Based on similar students, you're spending 12% less on accommodation. Great job optimizing your living costs!"
-            ];
-            
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            
-            // Add response to AI recommendations
-            const recommendationsContainer = document.getElementById('ai-recommendations');
-            const newRecommendation = `
-                <div class="alert-item">
-                    <i class="fas fa-robot"></i>
-                    <span><strong>AI Response:</strong> ${randomResponse}</span>
-                </div>
-            `;
-            recommendationsContainer.innerHTML = newRecommendation + recommendationsContainer.innerHTML;
-            
-            // Clear question
-            document.getElementById('ai-question').value = '';
-            
-            showNotification('AI advisor has responded to your question', 'success');
-        }
-
-        // Enhanced Charts
-        function initializeCharts() {
-            // Category Chart
-            const categoryCtx = document.getElementById('categoryChart')?.getContext('2d');
-            if (categoryCtx) {
-                new Chart(categoryCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: Object.values(state.categories).map(cat => cat.name),
-                        datasets: [{
-                            data: Object.values(state.categories).map(cat => cat.spent),
-                            backgroundColor: [
-                                '#1a5f2a', '#28a745', '#ffc107', '#dc3545', 
-                                '#6f42c1', '#fd7e14', '#20c997'
-                            ],
-                            borderWidth: 2,
-                            borderColor: '#ffffff'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { 
-                                position: 'bottom',
-                                labels: {
-                                    padding: 20,
-                                    usePointStyle: true
-                                }
-                            }
-                        },
-                        cutout: '60%'
-                    }
-                });
-            }
-
-            // Trend Chart
-            const trendCtx = document.getElementById('trendChart')?.getContext('2d');
-            if (trendCtx) {
-                new Chart(trendCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                        datasets: [{
-                            label: 'Monthly Spending',
-                            data: [25850, 21500, 18900, 0, 0, 0],
-                            borderColor: '#1a5f2a',
-                            backgroundColor: 'rgba(26, 95, 42, 0.1)',
-                            tension: 0.3,
-                            fill: true,
-                            borderWidth: 3
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: { 
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(0,0,0,0.1)'
-                                }
-                            },
-                            x: {
-                                grid: {
-                                    color: 'rgba(0,0,0,0.1)'
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Budget vs Actual Chart
-            const budgetCtx = document.getElementById('budgetChart')?.getContext('2d');
-            if (budgetCtx) {
-                const categories = Object.values(state.categories);
-                new Chart(budgetCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: categories.map(cat => cat.name.split(' ')[0]),
-                        datasets: [
-                            {
-                                label: 'Allocated',
-                                data: categories.map(cat => cat.allocated),
-                                backgroundColor: 'rgba(26, 95, 42, 0.7)',
-                                borderColor: '#1a5f2a',
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'Spent',
-                                data: categories.map(cat => cat.spent),
-                                backgroundColor: 'rgba(40, 167, 69, 0.7)',
-                                borderColor: '#28a745',
-                                borderWidth: 1
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: { 
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(0,0,0,0.1)'
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Pulse Chart (Financial Health)
-            const pulseCtx = document.getElementById('pulseChart')?.getContext('2d');
-            if (pulseCtx) {
-                new Chart(pulseCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Financial Health'],
-                        datasets: [{
-                            data: [78, 22],
-                            backgroundColor: ['#28a745', '#e9ecef'],
-                            borderWidth: 0
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        cutout: '80%',
-                        plugins: {
-                            legend: { display: false },
-                            tooltip: { enabled: false }
-                        }
-                    }
-                });
-            }
-        }
-
-        // Utility Functions
+        // ===== UTILITY FUNCTIONS =====
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
-            notification.className = 'notification';
+            notification.className = `notification ${type}`;
             notification.textContent = message;
-            notification.style.background = type === 'error' ? 'var(--danger)' : 
-                                          type === 'success' ? 'var(--success)' : 'var(--info)';
             
             document.body.appendChild(notification);
             
@@ -2355,11 +3734,10 @@
             }, 4000);
         }
 
-        function updateBudgetAllocationDisplay() {
-            // This function is called when budget page is activated
-            renderBudgetCategories();
-            updateAvailableForAllocation();
-        }
+        // Start with login system
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLoginSystem();
+        });
     </script>
 </body>
 </html>
